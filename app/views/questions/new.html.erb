@@ -1,0 +1,20 @@
+<%= form_for(:question) do |f| %>
+    <%= f.label :question %>
+    <%= f.text_field :content, class: 'form-control' %>
+
+    <%= f.label :subject %>
+    <%= f.select(:subjects_id, options_for_select(subjects))%>
+    <%= f.label :type %>
+    <%= f.select(:question_types_id , options_for_select(question_type)) %>
+
+    <br />
+
+    <%= f.label :Answer %>
+    <%= form_for(:answers) do |answer|%>
+    <% (0..3).each do |n| %>
+        <%= answer.text_field :"#{n}[content]" ,class: 'form-control' %>
+        <%= answer.check_box  :"#{n}[correct]" , class: 'checkbox inline' %>
+    <% end %>
+    <%= f.submit "Create question" %>
+    <% end %>
+<% end %>

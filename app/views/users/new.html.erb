@@ -1,0 +1,28 @@
+<h1>Sign up</h1>
+<div class="form-signup" >
+    <%= form_for(@user) do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name , class: 'form-control' %>
+
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+
+        <%= f.label :school_id %>
+        <%= f.select(:school_id, options_for_select([1])) %>
+
+        <%= f.label :gender %>
+        <%= f.select(:gender, options_for_select([["male"], ["female"], ["other"]])) %>
+        </br>
+
+        <%= f.label :age %>
+        <%= f.number_field :age, class: 'form-control'%>
+
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+        <%= f.submit "Create my account", class: "btn btn-primary" %>
+    <% end %>
+</div>

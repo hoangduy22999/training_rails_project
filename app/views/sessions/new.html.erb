@@ -1,0 +1,21 @@
+<h1>Sign up</h1>
+<div class="form-login">
+    <%= form_for(:session, url: login_path) do |f| %>
+        <div class="form-floating mb-3">
+        <%= f.label :email , :for => 'floatingInput' %>
+        <%= f.email_field :email, id: 'floatingInput', class: 'form-control', placeholder: 'name@example.com' %>
+        </div>
+        <div class="form-floating">
+        <%= f.label :password , :for => 'floatingPassword' %>
+        <%= f.password_field :password, class: 'form-control' %>
+        <div>
+
+        <%= f.label :remember_me, class: "checkbox inline" do %>
+            <%= f.check_box :remember_me %>
+            <span>Remember me on this computer</span>
+        <% end %>
+
+        <%= f.submit "Log in", class: "btn btn-primary" %>
+    <% end %>
+    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+</div>
