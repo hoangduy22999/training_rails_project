@@ -1,0 +1,63 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+<div class="sidebar">
+
+  <div class="form-inline">
+    <div class="input-group" data-widget="sidebar-search">
+      <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+      <div class="input-group-append">
+        <button class="btn btn-sidebar">
+          <i class="fas fa-search fa-fw"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      
+    <li class="nav-item has-treeview">
+    <a href="#" class="nav-link">
+      <i class="fas fa-chart-bar"></i>
+      <p>
+        Charts
+        <i class="right fas fa-angle-left"></i>
+      </p>
+    </a>
+    <ul class="nav nav-treeview">
+      <% subjects.each do |sb|%>
+      <li class="nav-item">
+        <a href="/exam-group/<%= sb[1] %>" class="nav-link">
+          <i class="far fa-circle nav-icon"></i>
+          <p><%= "#{sb[0]}"%></p>
+        </a>
+      </li>
+      <% end %>
+    </ul>
+  </li>
+
+      <li class="nav-item">
+        <a href="/exam/create" class="nav-link">
+        <i class="fas fa-pencil-ruler"></i>
+        <p>Create Exam</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="/question/create" class="nav-link">
+        <i class="fas fa-question"></i>
+        <p>Create Question</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+        <i class="fas fa-users"></i>
+        <p>Users</p>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+</div>
+</aside>

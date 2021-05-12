@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  users: one
-  exam_questions: one
+  question: one
+  exam: one
 
 two:
-  users: two
-  exam_questions: two
+  question: two
+  exam: two

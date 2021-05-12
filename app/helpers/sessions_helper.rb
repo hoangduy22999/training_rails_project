@@ -42,9 +42,8 @@ module SessionsHelper
         cookies.delete(:remember_token)
     end
 
-
-    def subjects
-        @subjects = Subject.all()
+    def is_admin?
+        current_user.admin_role
     end
 
     def exam_for_subject(id)
@@ -62,5 +61,17 @@ module SessionsHelper
             sb.push([s.name, s.id])
         end
         sb
+    end
+
+    def question_group(id)
+        @quetion = Question.where(:type_id=>id)
+    end
+
+    def question_count
+        count = 0
+    end
+
+    def user_count
+        a = User.where(admin_role: false).count
     end
 end

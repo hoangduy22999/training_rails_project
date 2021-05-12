@@ -1,20 +1,49 @@
-<%= form_for(:question) do |f| %>
-    <%= f.label :question %>
-    <%= f.text_field :content, class: 'form-control' %>
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">Create Question</h3>
+    </div>
 
-    <%= f.label :subject %>
-    <%= f.select(:subjects_id, options_for_select(subjects))%>
-    <%= f.label :type %>
-    <%= f.select(:question_types_id , options_for_select(question_type)) %>
-
-    <br />
-
-    <%= f.label :Answer %>
-    <%= form_for(:answers) do |answer|%>
+<%= form_for(:question, html: {class: "form-horizontal"}) do |f| %>
+    <div class="card-body">
+        <div class="form-group row">
+        <%= f.label :question, for: 'inputEmail3', class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+            <%= f.text_field :content, class: 'form-control' %>
+            </div>
+        </div>
+    <div class="row">
+    <div class="col-md-3">
+    <div class="form-group">
+    <%= f.label :subject, for: 'inputEmail3', class: 'col-sm-5 col-form-label' %>
+    <%= f.select(:subject_id, options_for_select(subjects),{}, {class:"form-control select2"})%>
+    </div>
+    </div>
+    <div class="col-md-3">
+    <div class="form-group">
+    <%= f.label :type, for: 'inputEmail3', class: 'col-sm-5 col-form-label' %>
+    <%= f.select(:type_id , options_for_select(question_type, 1), {}, {class: "form-control select2", id: "question_type_select"}) %>
+    </div>
+    </div>
+    </div>
+    </br>
+    <%= form_for(:answers, html: {class: "form-horizontal", id: "form-answer"}) do |answer|%>
     <% (0..3).each do |n| %>
-        <%= answer.text_field :"#{n}[content]" ,class: 'form-control' %>
+        <div class="row" >
+        <div class="col-sm-2">
         <%= answer.check_box  :"#{n}[correct]" , class: 'checkbox inline' %>
+        <%= answer.label :true%>
+        </div>
+        <div class="col-sm-9">
+        <%= answer.text_field :"#{n}[content]" ,class: 'form-control' %>
+        </div>
+
+        </div>
     <% end %>
-    <%= f.submit "Create question" %>
+    </div>
+    <div class="card-footer">
+    <%= f.submit "Create question" ,class: "btn btn-primary"%>
+    </div>
     <% end %>
 <% end %>
+
+</div>

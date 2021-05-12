@@ -1,21 +1,37 @@
-<h1>Sign up</h1>
-<div class="form-login">
-    <%= form_for(:session, url: login_path) do |f| %>
-        <div class="form-floating mb-3">
-        <%= f.label :email , :for => 'floatingInput' %>
-        <%= f.email_field :email, id: 'floatingInput', class: 'form-control', placeholder: 'name@example.com' %>
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">Log in</h3>
+    </div>
+    <%= form_for(:session, url: login_path,html: {class: "form-horizontal"}) do |f|  %>
+        <div class="card-body">
+            <div class="form-group row">
+                <%= f.label :email, for: 'inputEmail3', class: 'col-sm-2 col-form-label' %>
+                <div class="col-sm-10">
+                    <%= f.email_field :email, id: 'inputEmail3', class: 'form-control', placeholder: 'name@example.com' %>
+                </div>
+            </div>
+            <div class="form-group row">
+                <%= f.label :password , for: 'inputPassword3', class: 'col-sm-2 col-form-label' %>
+                <div class="col-sm-10">            
+                <%= f.password_field :password, class: 'form-control', id: 'inputPassword3', placeholder: 'password' %>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10">
+                    <div class="form-check">
+                        <%= f.label :remember_me, class: "form-check-label", for:"exampleCheck2" do %>
+                            <%= f.check_box :remember_me, class: 'form-check-input', id: 'exampleCheck2' %>
+                            <span>Remember me</span>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        
         </div>
-        <div class="form-floating">
-        <%= f.label :password , :for => 'floatingPassword' %>
-        <%= f.password_field :password, class: 'form-control' %>
-        <div>
-
-        <%= f.label :remember_me, class: "checkbox inline" do %>
-            <%= f.check_box :remember_me %>
-            <span>Remember me on this computer</span>
+        
+            <div class="card-footer">
+            <%= f.submit "Log in", class: "btn btn-primary" %>
+            <p>You are new user? <%= link_to "Sign up now!", signup_path , class: "btn btn-default"%></p>
+            </div>
         <% end %>
-
-        <%= f.submit "Log in", class: "btn btn-primary" %>
-    <% end %>
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
 </div>

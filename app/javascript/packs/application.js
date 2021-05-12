@@ -6,8 +6,26 @@
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
-import "channels"
+import "bootstrap";
+import "../stylesheets/application.scss";
+
+//= require adminlte
+
+// document.addEventListener("turbolinks:load", () => {
+//     $('[data-toggle="tooltip"]').tooltip()
+//   });
+
+
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+require("channels")
+
+var jQuery = require("jquery");
+global.$ = global.jQuery = jQuery;
+window.$ = window.jQuery = jQuery;
+
+require('admin-lte');
+
+import "@fortawesome/fontawesome-free/css/all.min";

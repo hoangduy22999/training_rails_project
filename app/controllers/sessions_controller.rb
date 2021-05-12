@@ -1,8 +1,10 @@
 class SessionsController < ApplicationController
+  before_action :require_login, only: [:create, :new]
   def new
   end
 
   def profile
+    redirect_to login_path if !is_logged_in?
   end
   
   def create
@@ -20,6 +22,13 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
-    redirect_to root_url
+    redirect_to login_path
   end
+  private
+    def require_login
+      if is_logged_in?
+          flash[:error] = "You are logged"
+          redirect_to root_path
+      end
+    end
 end
