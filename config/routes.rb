@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   resource :users
   get '/signup', to: 'users#new'
-  get '/profile', to: 'user#profile'
 
   get '/exam-group/(:format)', to: 'exams#group'
   get '/exam/create', to: 'exams#new'
@@ -19,8 +18,5 @@ Rails.application.routes.draw do
   get '/question/create', to: 'questions#new'
   post '/question/create', to: 'questions#create'
 
-  get '/exam/create', to: 'exams#new'
-  post '/exam/create', to: 'exams#create'
-  
-  resource :admins
+  # get "*path" => redirect("/")
 end

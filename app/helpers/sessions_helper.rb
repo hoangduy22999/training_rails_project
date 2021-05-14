@@ -42,25 +42,7 @@ module SessionsHelper
         cookies.delete(:remember_token)
     end
 
-
-    def subjects
-        @subjects = Subject.all()
-    end
-
-    def exam_for_subject(id)
-        @exam_for_subject = Exam.where(subject_id: :id)
-    end
-
-    def question_type
-        [["choice", 1],["write", 2]]
-    end
-
-    def subjects
-        subject = Subject.all
-        sb = []
-        subject.each do |s|
-            sb.push([s.name, s.id])
-        end
-        sb
+    def is_admin?
+        current_user && current_user.admin_role
     end
 end

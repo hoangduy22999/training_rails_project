@@ -1,6 +1,4 @@
-class Assingment < ApplicationRecord
-  belongs_to :exam
+class ExamQuestion < ApplicationRecord
   belongs_to :question
-  has_many :user_answers
-  has_many :users, through: :user_answers
+  belongs_to :exam
 end
