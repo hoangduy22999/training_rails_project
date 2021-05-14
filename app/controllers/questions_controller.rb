@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-    before_action :require_admin_login, only: [:new, :create, :edit]
     def index
     end
 
@@ -11,7 +10,9 @@ class QuestionsController < ApplicationController
     end
     
     def create
-        @params = params
+        if cannot? :create, @question
+            @params = params
+        end
         render 'show'
         # @question = Question.new(question_params)
         # if @question.save
@@ -47,12 +48,5 @@ class QuestionsController < ApplicationController
                 answers.push([answer_param[:content],answer_param[:correct]])
             end
             answers
-        end
-
-        def require_admin_login
-            if is_admin?
-                flash[:warning] = "You not a admin"
-                redirect_to root_path
-            end
         end
 end
