@@ -9,6 +9,10 @@ gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
+# Use devise gem to authenticate
+gem "devise", "~> 4.1"
+# Use cancancan admin permission
+gem 'cancancan'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
