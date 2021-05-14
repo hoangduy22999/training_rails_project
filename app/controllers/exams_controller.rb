@@ -17,7 +17,7 @@ class ExamsController < ApplicationController
 
     private
     def require_admin_login
-        if is_admin?
+        if !is_admin?
             flash[:warning] = "You not a admin"
             redirect_to root_path
         end

@@ -18,6 +18,5 @@ Rails.application.routes.draw do
   get '/question/create', to: 'questions#new'
   post '/question/create', to: 'questions#create'
 
-
-  resource :admins
+  # get "*path" => redirect("/")
 end

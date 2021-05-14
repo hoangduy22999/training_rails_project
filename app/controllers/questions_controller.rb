@@ -11,21 +11,23 @@ class QuestionsController < ApplicationController
     end
     
     def create
-        @question = Question.new(question_params)
-        if @question.save
-            answer_params.each do |answer|
-                @answer = @question.answers.build(:content=>answer[0], :correct=>answer[1])
-                if !@answer.save
-                    flash[:warning] = "Create Answer Fails"
-                    break
-                    redirect_to question_create_path
-                end
-            end
-            flash[:success] = "Create Question Success"
-        else
-            flash[:warning] = "Create Question Fails"
-        end
-        redirect_to question_create_path
+        @params = params
+        render 'show'
+        # @question = Question.new(question_params)
+        # if @question.save
+        #     answer_params.each do |answer|
+        #         @answer = @question.answers.build(:content=>answer[0], :correct=>answer[1])
+        #         if !@answer.save
+        #             flash[:warning] = "Create Answer Fails"
+        #             break
+        #             redirect_to question_create_path
+        #         end
+        #     end
+        #     flash[:success] = "Create Question Success"
+        # else
+        #     flash[:warning] = "Create Question Fails"
+        # end
+        # redirect_to question_create_path
     end
 
     private
@@ -34,9 +36,15 @@ class QuestionsController < ApplicationController
         end
 
         def answer_params
+            type = params[:question][:type_id]
             answers ||= []
-            params.require(:answers).each do |answer|
-                answers.push([answer[1][:content],answer[1][:correct]])
+            answer_param = params[:question][:answers]
+            if type == 1
+                answer_param.each do |answer|
+                    answers.push([answer[1][:content],answer[1][:correct]])
+                end
+            else
+                answers.push([answer_param[:content],answer_param[:correct]])
             end
             answers
         end
