@@ -29,8 +29,7 @@ module QuestionsHelper
     end
 
     def fill_answer(answers)
-        answers.each do |answer|
-            
+        answers.each do |answer|            
         end
     end
 end
