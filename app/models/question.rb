@@ -4,4 +4,5 @@ class Question < ApplicationRecord
   has_many :exams, through: :exam_questions
 
   validates :content, presence: true
+
 end

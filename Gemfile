@@ -13,6 +13,10 @@ gem 'puma', '~> 5.0'
 gem "devise", "~> 4.1"
 # Use cancancan admin permission
 gem 'cancancan'
+# Use page_paginate for page
+gem 'will_paginate'
+gem 'kaminari'
+gem 'jquery-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker

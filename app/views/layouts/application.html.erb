@@ -10,8 +10,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-      
+    <div class="wrapper h-100">
+    <% @subjects  ||= [] %>
     <%= render 'layouts/base/admin/header'%>
     <% if user_signed_in? and current_user.admin? %>
     <%= render 'layouts/base/admin/slidebar'%>
@@ -22,8 +22,9 @@
 
     <div class="content-wrapper">
       <div class="container-fluid">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
       </div>
       <%= yield %>
     </div>

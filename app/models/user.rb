@@ -6,7 +6,7 @@ class User < ApplicationRecord
     attr_accessor :remember_token
     has_many :exams, dependent: :destroy
     has_many :user_answers
-    has_many :exam_questions, through: :user_answers
+    has_many :exam_questions, through: :user_answers 
 
     # validates :name, presence: true
     validates :password, presence: true, confirmation: true,

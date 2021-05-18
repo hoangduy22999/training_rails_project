@@ -1,0 +1,12 @@
+<div id="blogpost-table">
+    <%= form_tag(question_search_path, method: "get", remote: true) do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Enter search term" %>
+        <%= submit_tag "Search" %>
+    <% end %>
+</div>
+
+
+<div id="search-results">
+</div>
+
+<%= @search_results_questions.count  if @search_results_questions%>

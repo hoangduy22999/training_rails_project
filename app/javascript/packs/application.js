@@ -8,13 +8,8 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "bootstrap";
 import "../stylesheets/application.scss";
-
-//= require adminlte
-
-// document.addEventListener("turbolinks:load", () => {
-//     $('[data-toggle="tooltip"]').tooltip()
-//   });
-
+require('rails-ujs');
+require('jquery')
 
 
 Rails.start()
