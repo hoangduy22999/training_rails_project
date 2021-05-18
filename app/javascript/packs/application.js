@@ -8,9 +8,6 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "bootstrap";
 import "../stylesheets/application.scss";
-require('rails-ujs');
-require('jquery')
-
 
 Rails.start()
 Turbolinks.start()

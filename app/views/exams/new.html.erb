@@ -42,7 +42,7 @@
         <% @questions.last(10).each do |question| %>
             <%= question.content %><br />
         <% end %>
-        <%= render 'questions/index'%>
+        <%= render partial: 'questions/index' %>
     </div>
 </div>
     

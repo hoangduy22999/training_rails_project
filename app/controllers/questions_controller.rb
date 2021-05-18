@@ -4,10 +4,10 @@ class QuestionsController < ApplicationController
             @search_results_questions = Question.where('content LIKE ?', "%#{params[:search]}%")
             respond_to do |format|
                 format.html {}
-                format.js { render partial: '_search-results' }
+                format.js {}
             end
         else
-            @question = Question.all()
+            @search_results_questions = Question.all()
         end
     end
 
