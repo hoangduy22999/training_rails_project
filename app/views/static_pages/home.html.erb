@@ -1,4 +1,66 @@
-<div>
-    <h1>StaticPages#home</h1>
-    <p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+            <h3 class="card-title">Top</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>User</th>
+                    <th>Result</th>
+                    <th>Subject</th>
+                    <th style="width: 100px">Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @result_top.each_with_index do |top,index| %>
+                <tr>
+                    <td><%= index+1 %>.</td>
+                    <td><%= top.user.name %></td>
+                    <td><%= top.value %></td>
+                    <td><%= top.subject_id %></td>
+                    <td><%= top.time %></td>
+                </tr>
+                <% end %>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+            <h3 class="card-title">My Result</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>User</th>
+                    <th>Result</th>
+                    <th>Subject</th>
+                    <th style="width: 100px">Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @result_top.each_with_index do |top,index| %>
+                <tr>
+                    <td><%= index+1 %>.</td>
+                    <td><%= top.user.name %></td>
+                    <td><%= top.value %></td>
+                    <td><%= top.subject_id %></td>
+                    <td><%= top.time %></td>
+                </tr>
+                <% end %>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
 </div>

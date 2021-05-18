@@ -9,7 +9,7 @@
     <div class="field form-group row">
       <%= f.label :name, class: 'col-sm-2 col-form-label'%>
       <div class='col-sm-10'>
-          <%= f.text_field :name, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Name" %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", placeholder: "Name" %>
       </div>
     </div>
 
@@ -21,22 +21,14 @@
     </div>
 
     <div class="field form-group row">
-      <%= f.label :age, class: 'col-sm-2 col-form-label' %>
-      <div class="col-sm-4">
-        <%= f.number_field :age, autofocus: true, class: 'form-control', placeholder: 'Age' %>
-      </div>
-      <%= f.label :gender, class: 'col-sm-2 col-form-label' %>
-      <div class="col-sm-4">
-        <%= f.select(:gender, options_for_select([["male",1],["female",2],["other",3]]),{include_blank: "Select gender"}, {class: 'form-control', autofocus: true}) %>
+      <%= f.label :school, class: 'col-sm-2 col-form-label' %><br />
+      <div class="col-sm-10">
+        <%= f.number_field :school_id , autofocus:true, autocomplete: "age", class: 'form-control', placeholder: 'School'%>
       </div>
     </div>
 
-    <div class = "field form-group row">
-      <%= f.label :school_id, class: 'col-sm-2 col-form-label' %>
-      <div class="col-sm-10">
-        <%= f.select(:school_id, options_for_select([]),{include_blank: "Select school"},{class: 'form-control',autofocus:true}) %>
-      </div>
-    </div>
+
+
 
     <div class="field form-group row">
       <%= f.label :password, class: 'col-sm-2 col-form-label' %><br />

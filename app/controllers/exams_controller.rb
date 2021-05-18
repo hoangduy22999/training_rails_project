@@ -1,7 +1,7 @@
 class ExamsController < ApplicationController
     def new
         @exam = current_user.exams.new
-        @questions = Question
+        @search_results_questions = Question.all()
     end
 
     def create

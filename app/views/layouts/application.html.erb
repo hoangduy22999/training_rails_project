@@ -10,16 +10,17 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body class="hold-transition sidebar-mini">
+  <% if user_signed_in?%>
     <div class="wrapper h-100">
     <% @subjects  ||= [] %>
     <%= render 'layouts/base/admin/header'%>
-    <% if user_signed_in? and current_user.admin? %>
-    <%= render 'layouts/base/admin/slidebar'%>
-    <% else %>
-    <%= render 'layouts/base/user/slidebar' %>
-    <% end %>
+      <% if current_user.admin? %>
+        <%= render 'layouts/base/admin/slidebar'%>
+      <% else%>
+        <%= render 'layouts/base/user/slidebar' %>
+      <% end %>
     
-
+  <% end %>
     <div class="content-wrapper">
       <div class="container-fluid">
         <% flash.each do |message_type, message| %>
@@ -28,9 +29,6 @@
       </div>
       <%= yield %>
     </div>
-
-    <%= render 'layouts/base/admin/footer' %>
-
     </div>
   </body>
 </html>
