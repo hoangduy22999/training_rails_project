@@ -20,22 +20,24 @@ class QuestionsController < ApplicationController
     end
     
     def create
-        @question = Question.create(question_params)
-        if @question.save
-            if answer_type == "2"
-                @answer = @question.answers.build(permit_answer_write)
-                @answer.save!
-            else
-                (0..3).each do |index|
-                    @answer = @question.answers.build(permit_answer_choice(index))
-                    @answer.save!
-                end
-            end
-            flash[:success] = "Create Question Success"
-        else
-            flash[:warning] = "Create Question Fails"
-        end
-        redirect_to question_create_path
+        @params = params
+        render 'show'
+        # @question = Question.create(question_params)
+        # if @question.save
+        #     if answer_type == "2"
+        #         @answer = @question.answers.build(permit_answer_write)
+        #         @answer.save!
+        #     else
+        #         (0..3).each do |index|
+        #             @answer = @question.answers.build(permit_answer_choice(index))
+        #             @answer.save!
+        #         end
+        #     end
+        #     flash[:success] = "Create Question Success"
+        # else
+        #     flash[:warning] = "Create Question Fails"
+        # end
+        # redirect_to question_create_path
     end
 
     private

@@ -1,8 +1,8 @@
 <div>
     <%= form_tag(exams_search_path, method: "get", remote: true) do %>
-        <%= text_field_tag :search, params[:search], placeholder: "Enter search term" %>
-        <%= select_tag :time, options_for_select([["<=30m",30],["<=60m",60],[">60m",61]]) %>
-        <%= submit_tag "Search" %>
+        <%= text_field_tag :search, params[:search], class: 'form-control form-control-lg', placeholder: "Enter search term" %>
+        <%= select_tag :time, options_for_select([["<=30m",30],["<=60m",60],[">60m",61]]), class: 'form-group' %>
+        <%= submit_tag "Search", class: 'btn btn-lg btn-default' %>
     <% end %>
 </div>
 
@@ -23,9 +23,9 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <% @search_result_exams.each_with_index(1) do |exam, index| %>
+                  <% @search_result_exams.each_with_index do |exam, index| %>
                   <tr>
-                    <td><%= index %></td>
+                    <td><%= index + 1  %></td>
                     <td><%= exam.name %></td>
                     <td><%= exam.questions.count %></td>
                     <td><%= show_time_in_hour(exam.time) %></td>
