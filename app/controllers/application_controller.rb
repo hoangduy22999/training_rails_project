@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit :account_update, keys: added_attrs
     end
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> ad5ece2465df8a0811eba7deb5fc727115b922af
 end

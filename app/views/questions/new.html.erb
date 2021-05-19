@@ -15,8 +15,12 @@
     <div class="col-md-3">
     <div class="form-group">
     <%= f.label :subject, for: 'inputEmail3', class: 'col-sm-5 col-form-label' %>
+<<<<<<< HEAD
     <% subjects_array = @subjects.all.map{ |subject| [subject.name, subject.id]} %>
     <%= f.select(:subject_id, options_for_select(subjects_array),{}, {class:"form-control select2", id:"subject_id"})%>
+=======
+    <%= f.select(:subject_id, options_for_select([1]),{}, {class:"form-control select2", id:"subject_id"})%>
+>>>>>>> ad5ece2465df8a0811eba7deb5fc727115b922af
     </div>
     </div>
     <div class="col-md-3">

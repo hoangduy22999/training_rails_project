@@ -25,5 +25,12 @@ Rails.application.routes.draw do
     get "signup" => "devise/"
   end
 
+  as :user do
+    get "signin" => "devise/sessions#new"
+    post "signin" => "devise/sessions#create"
+    delete "signout" => "devise/sessions#destroy"
+    get "signup" => "devise/"
+  end
+
   # get "*path" => redirect("/")
 end

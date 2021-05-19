@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="card card-info col-sm-8">
   <div class="card-header">
       <h3 class="card-title">Edit <%= resource_name.to_s.humanize %></h3>
@@ -8,6 +9,14 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field form-group row">
+=======
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+>>>>>>> ad5ece2465df8a0811eba7deb5fc727115b922af
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
@@ -16,8 +25,13 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
+<<<<<<< HEAD
   <div class="field form-group row">
     <%= f.label :new_password %> <i>(leave blank if you don't want to change it)</i><br />
+=======
+  <div class="field">
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+>>>>>>> ad5ece2465df8a0811eba7deb5fc727115b922af
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br />
@@ -25,11 +39,16 @@
     <% end %>
   </div>
 
+<<<<<<< HEAD
   <div class="field form-group row">
+=======
+  <div class="field">
+>>>>>>> ad5ece2465df8a0811eba7deb5fc727115b922af
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+<<<<<<< HEAD
   <div class="field form-group row">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
@@ -39,13 +58,28 @@
 <div class="card-footer">
   <div class="actions">
     <%= f.submit "Update", class: "btn btn-primary" %>
+=======
+  <div class="field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+>>>>>>> ad5ece2465df8a0811eba7deb5fc727115b922af
   </div>
 <% end %>
 
 <h3>Cancel my account</h3>
 
+<<<<<<< HEAD
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-primary' %></p>
 
 <%= link_to "Back", :back %>
 </div>
 </div>
+=======
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= link_to "Back", :back %>
+>>>>>>> ad5ece2465df8a0811eba7deb5fc727115b922af
