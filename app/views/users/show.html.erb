@@ -1,7 +1,0 @@
-<% if @users %>
-<% @users.each do |user| %>
-    <%= user.name %>, <%= user.email %>
-<% end %>
-<% else%>
-    <%= current_user.name %>, <%= current_user.email %>
-<% end %>
