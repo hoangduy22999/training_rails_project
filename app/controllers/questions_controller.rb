@@ -1,19 +1,19 @@
 class QuestionsController < ApplicationController
     def index
         if params[:search]
-            @search_results_questions = Question.where('content LIKE ?', "%#{params[:search]}%")
+            @search_results_questions = Question.search_by_name(params[:search])
             respond_to do |format|
                 format.html {}
                 format.js {}
             end
         else
-            @search_results_questions = Question.all()
+            @search_results_questions = Question.all
         end
     end
 
     def new
         @question = Question.new
-        @subjects = Subject.all()
+        @subjects = Subject.all
     end
 
     def edit

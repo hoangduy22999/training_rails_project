@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/exam-group/(:format)', to: 'exams#group'
   get '/exam/create', to: 'exams#new'
   post '/exam/create', to: 'exams#create'
+  get '/exams/show', to: 'exams#show'
+  get '/exams/search', to: 'exams#search'
 
   get '/question/create', to: 'questions#new'
   post '/question/create', to: 'questions#create'

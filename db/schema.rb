@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_150932) do
+ActiveRecord::Schema.define(version: 2021_05_19_021643) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2021_05_18_150932) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
     t.index ["user_id"], name: "index_exams_on_user_id"
   end
 
@@ -64,7 +65,7 @@ ActiveRecord::Schema.define(version: 2021_05_18_150932) do
 
   create_table "results", force: :cascade do |t|
     t.integer "value"
-    t.time "time"
+    t.integer "time"
     t.integer "subject_id", null: false
     t.integer "exam_id", null: false
     t.integer "user_id"

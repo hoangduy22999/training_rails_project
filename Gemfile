@@ -13,6 +13,8 @@ gem 'puma', '~> 5.0'
 gem "devise", "~> 4.1"
 # Use cancancan admin permission
 gem 'cancancan'
+# Use ransack to search query
+gem 'ransack'
 # Use page_paginate for page
 gem 'jquery-rails'
 # Use SCSS for stylesheets

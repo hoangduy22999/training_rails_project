@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
-    @result_top = Result.order(:value).reverse_order.first(5)
-    @my_result = Result.where()
+    @result_top = Result.top
+    @my_result = Result.my_results(current_user)
   end
 
   def help
