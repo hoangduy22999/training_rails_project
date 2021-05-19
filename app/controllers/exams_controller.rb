@@ -10,11 +10,11 @@ class ExamsController < ApplicationController
 
     def search
         if params[:search] || params[:time]
-            @search_results_exams = Exam.search_by_name(params[:search])
+            @search_result_exams = Exam.search_by_name(params[:search])
             if params[:time]
                 time = params[:time].to_i
-                @search_results_exams = time <= 60 ? @search_results_exams.search_lt_time(time):
-                                                    @search_results_exams.search_gt_time(time)
+                @search_result_exams = time <= 60 ? @search_result_exams.search_lt_time(time):
+                                                    @search_result_exams.search_gt_time(time)
                 # @search_results_exams = @search_results_exams.search_lt_time(params[:time].to_i) if params[:time].to_i <= 60
                 # @search_results_exams = @search_results_exams.search_gt_time(params[:time].to_i) if params[:time].to_i > 60
             end
@@ -23,14 +23,7 @@ class ExamsController < ApplicationController
                 format.js {}
             end
         else
-            @search_results_exams = Exam.all
+            @search_result_exams = Exam.all
         end
     end
-<<<<<<< HEAD
-
-    def show
-        @search_results_exams = Exam.all
-    end
-=======
->>>>>>> ad5ece2465df8a0811eba7deb5fc727115b922af
 end

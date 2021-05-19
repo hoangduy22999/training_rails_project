@@ -14,31 +14,18 @@
     <div class="wrapper h-100">
     <% @subjects  ||= [] %>
     <%= render 'layouts/base/admin/header'%>
-<<<<<<< HEAD
       <% if current_user.admin? %>
         <%= render 'layouts/base/admin/slidebar'%>
       <% else%>
         <%= render 'layouts/base/user/slidebar' %>
       <% end %>
-=======
-    <% if user_signed_in? and current_user.admin? %>
-    <%= render 'layouts/base/admin/slidebar'%>
-    <% else %>
-    <%= render 'layouts/base/user/slidebar' %>
-    <% end %>
->>>>>>> ad5ece2465df8a0811eba7deb5fc727115b922af
     
   <% end %>
     <div class="content-wrapper">
       <div class="container-fluid">
-<<<<<<< HEAD
         <% flash.each do |message_type, message| %>
           <div class="alert alert-<%= message_type %>"><%= message %></div>
         <% end %>
-=======
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
->>>>>>> ad5ece2465df8a0811eba7deb5fc727115b922af
       </div>
       <%= yield %>
     </div>
