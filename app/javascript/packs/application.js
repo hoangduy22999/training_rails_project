@@ -9,14 +9,6 @@ import * as ActiveStorage from "@rails/activestorage"
 import "bootstrap";
 import "../stylesheets/application.scss";
 
-//= require adminlte
-
-// document.addEventListener("turbolinks:load", () => {
-//     $('[data-toggle="tooltip"]').tooltip()
-//   });
-
-
-
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

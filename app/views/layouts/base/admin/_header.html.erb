@@ -13,66 +13,36 @@
 </ul>
 
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-        <i class="fas fa-search"></i>
+    <% if user_signed_in? %>
+    <li class="nav-item dropdown dropleft">
+      <a class="nav-link" data-bs-toggle="dropdown" href="/profile" aria-haspopup="true" aria-expanded="false">
+        <i class="far fa-user mr-1"></i><%= current_user.email %>
       </a>
-      <div class="navbar-search-block">
-        <form class="form-inline">
-          <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-navbar" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
-              <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-          </div>
-        </form>
+      <div class="dropdown-menu dropdown-menu-sm">
+        <div class="dropdown-item">
+          <i class="fas fa-id-badge"></i><%= link_to "Profile", profile_path, class: "dropdown-item d-inline"%>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item">
+          <i class="fas fa-cog"></i><%= link_to "Setting", edit_user_registration_path(current_user), class: "dropdown-item d-inline" %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item">
+        <i class="fas fa-sign-out-alt"></i><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item d-inline"%>
+        </div>
       </div>
     </li>
 
-    <% if user_signed_in? %>
-    <li class="nav-item dropdown">
-      <a class="nav-link" data-bs-toggle="dropdown" href="/profile">
-        <i class="far fa-user"></i>
-      </a>
-      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-    </li>
-
-    <li class="nav-item">
-      <%= link_to "Logout", signout_path, method: :delete, class: "nav-link" %>
-    </li>
     <% else %>
     <li class="nav-item">
-    <%= link_to "Sign In", signin_path, class: "nav-link" %>
+        <%= link_to "Sign In", signin_path, class: 'btn btn-outline-info mr-2' %>
     </li>
     <li class="nav-item">
-    <%= link_to "Sign Up",new_user_registration_path, class: "nav-link" %>
+      <%= link_to "Sign Up",new_user_registration_path, class: 'btn btn-outline-success' %>
     </li>
 
     <% end %>
+
 
   </ul>
 </nav>
