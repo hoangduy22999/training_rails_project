@@ -30,4 +30,15 @@ class ExamsController < ApplicationController
     def show
         @search_result_exams = Exam.all
     end
+    
+    def detail
+        @exam = Exam.find(params[:format])
+        @questions = @exam.questions
+        @result = Result.new
+        @result.user_answers.build
+    end
+
+    def submit
+        @params = params
+    end
 end
