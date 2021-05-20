@@ -3,7 +3,6 @@
 class Ability
   include CanCan::Ability
 
-<<<<<<< HEAD
   def initialize(user)
     alias_action :create, :read, :update, :destroy, to: :crud
     can :read, :all
@@ -12,14 +11,6 @@ class Ability
       if user.admin?
         can :crud, User, admin_role: false
         can :crud, [Exam,Question,Answer]
-=======
-  def initialize(users)
-    can :read, :all
-    if user.present?
-      can [:read,:create], User_Answer
-      if user.admin?
-        
->>>>>>> ad5ece2465df8a0811eba7deb5fc727115b922af
       end
     end
     # Define abilities for the passed in user here. For example:
