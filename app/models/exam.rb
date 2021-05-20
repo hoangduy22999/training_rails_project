@@ -13,13 +13,11 @@ class Exam < ApplicationRecord
   end
 
   def subject_id
-    self.questions.select(:subject_id).distinct.count == 1 ? self.questions.first.subject_id : 1
+    questions.select(:subject_id).distinct.count == 1 ? questions.first.subject_id : 1
   end
 
   scope :search_by_name, ->search{ where("name LIKE ?", "%#{search}%") }
   scope :search_lt_time, ->time{ where("time < ?", time) }
   scope :search_gt_time, ->time{ where("time > ?", time) }
-  scope :search_lt_question, ->question{ where("questions.count > ?", question) } 
-  scope :search_by_subject, ->id{ where("result_average > ?": id) }
-
+  scope :search_by_subject, ->id{ where subject_id: id }
 end

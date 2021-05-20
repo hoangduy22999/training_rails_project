@@ -1,76 +1,9 @@
-<div class="card card-info">
-    <div class="card-header">
-        <h3 class="card-title">Create Question</h3>
-    </div>
+<%= form_for @question do |ques| %>
+    <%= ques.label :content %>
+    <%= ques.text_field :content %>
 
-<%= form_for(:question, html: {class: "form-horizontal"}) do |f| %>
-    <div class="card-body">
-        <div class="form-group row">
-        <%= f.label :question, for: 'inputEmail3', class: 'col-sm-2 col-form-label' %>
-            <div class="col-sm-10">
-            <%= f.text_field :content, class: 'form-control' %>
-            </div>
-        </div>
-    <div class="row">
-    <div class="col-md-3">
-    <div class="form-group">
-    <%= f.label :subject, for: 'inputEmail3', class: 'col-sm-5 col-form-label' %>
-    <% subjects_array = @subjects.all.map{ |subject| [subject.name, subject.id]} %>
-    <%= f.select(:subject_id, options_for_select(subjects_array),{}, {class:"form-control select2", id:"subject_id"})%>
-    </div>
-    </div>
-    <div class="col-md-3">
-    <div class="form-group">
-    <%= f.label :type, for: 'inputEmail3', class: 'col-sm-5 col-form-label' %>
-    <%= f.select(:type_id , options_for_select(question_type, 1), {}, {class: "form-control select2", id: "question_type_select"}) %>
-    </div>
-    </div>
-    </div>
-    <div id="write-answer-form">
-    <%= form_for(:"question[answers-write]", html: {class: "form-horizontal", id: "form-answer"}) do |answer|%>
-        <div class="col-sm-9">
-        <%= answer.text_area :content, class: 'form-control' %>
-        <%= answer.hidden_field :correct, value: 'true' %>
-        </div>
-    </div>
-
-    <div id="choice-answer-form">
-    <%= form_for(:"question[answers-choice]", html: {class: "form-horizontal", id: "form-answer"}) do |answer|%>
-        <% (0..3).each do |n| %>
-            <div class="form-group row" id="answer-<%= n %>">
-            <div class="col-sm-2">
-            <%= answer.check_box  :"#{n}[correct]" , class: 'checkbox inline' %>
-            <%= answer.label :true %>
-            </div>
-            <div class="col-sm-9">
-            <%= answer.text_field :"#{n}[content]" ,class: 'form-control' %>
-            </div>
-            </div>
-        <% end %>
-
-    </div>
-    <div class="card-footer">
-    <%= f.submit "Create question" ,class: "btn btn-primary"%>
-    </div>
-    <% end %>
+    <%= fields_for :answer do |ans| %>
+        <%= ans.label :content %>
+        <%= ans.text_field :content %>
     <% end %>
 <% end %>
-
-<script>
-    function check_question_type(){
-        var text=$('#question_type_select').val();
-        var a = $('#choice-answer-form');
-        var b = $('#write-answer-form');
-        a.hide();
-        b.toggle();
-        if(text==1){
-            a.toggle();
-            b.hide();
-        }
-    }
-    $('#question_type_select').change(check_question_type);
-    check_question_type();
-
-</script>
-
-</div>

@@ -26,4 +26,8 @@ class ExamsController < ApplicationController
             @search_result_exams = Exam.all
         end
     end
+
+    def show
+        @search_result_exams = Exam.all
+    end
 end

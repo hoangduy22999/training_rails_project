@@ -8,4 +8,5 @@ class Question < ApplicationRecord
   scope :search_by_name, ->search{ where("name LIKE ?", "%#{search}%") }
   scope :group_by_exam, ->exam{ where(exam_id: exam.id) }
 
+  accepts_nested_attributes_for :answers, allow_destroy: true
 end
