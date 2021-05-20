@@ -14,38 +14,20 @@ class QuestionsController < ApplicationController
     def new
         @question = Question.new
         @subjects = Subject.all
+        @question.answers.build
     end
 
     def edit
     end
     
     def create
-        @params = params
+        @params = question_params
         render 'show'
-        # @question = Question.create(question_params)
-        # if @question.save
-        #     if answer_type == "2"
-        #         @answer = @question.answers.build(permit_answer_write)
-        #         @answer.save!
-        #     else
-        #         (0..3).each do |index|
-        #             @answer = @question.answers.build(permit_answer_choice(index))
-        #             @answer.save!
-        #         end
-        #     end
-        #     flash[:success] = "Create Question Success"
-        # else
-        #     flash[:warning] = "Create Question Fails"
-        # end
-        # redirect_to question_create_path
+
     end
 
     private
         def question_params
-            params.require(:question).permit(:content, :subject_id, :type_id)
-        end
-
-        def answer_type
-            params[:question][:type_id]
+            params.require(:question).permit(:content, answers_attributes: [:content])
         end
 end

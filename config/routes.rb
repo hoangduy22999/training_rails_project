@@ -14,17 +14,11 @@ Rails.application.routes.draw do
   get '/question/create', to: 'questions#new'
   post '/question/create', to: 'questions#create'
   get '/question/search', to: 'questions#index'
+  resource :questions
 
   get 'profile', to: 'static_pages#profile'
 
-
-  as :user do
-    get "signin" => "devise/sessions#new"
-    post "signin" => "devise/sessions#create"
-    delete "signout" => "devise/sessions#destroy"
-    get "signup" => "devise/"
-  end
-
+  
   as :user do
     get "signin" => "devise/sessions#new"
     post "signin" => "devise/sessions#create"
