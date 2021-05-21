@@ -10,21 +10,19 @@ Rails.application.routes.draw do
   post '/exam/create', to: 'exams#create'
   get '/exams/show', to: 'exams#show'
   get '/exams/search', to: 'exams#search'
+  get '/exam/detail', to: 'exams#detail'
+  post '/exam/detail', to: 'results#show'
 
   get '/question/create', to: 'questions#new'
   post '/question/create', to: 'questions#create'
   get '/question/search', to: 'questions#index'
+  resource :questions
+  get 'results', to: 'results#show'
+  post 'results', to: 'results#create'
 
   get 'profile', to: 'static_pages#profile'
 
-
-  as :user do
-    get "signin" => "devise/sessions#new"
-    post "signin" => "devise/sessions#create"
-    delete "signout" => "devise/sessions#destroy"
-    get "signup" => "devise/"
-  end
-
+  
   as :user do
     get "signin" => "devise/sessions#new"
     post "signin" => "devise/sessions#create"
