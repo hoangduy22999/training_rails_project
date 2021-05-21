@@ -25,7 +25,7 @@
 </div>
 
 <div class="card-body">
-  <%= form_for @result do |f| %>
+  <%= form_for @result, url: results_path(@result) do |f| %>
     <%= f.hidden_field :subject_id, value: @exam.subject_id %>
     <%= f.hidden_field :exam_id, value: @exam.id %>
     <%= f.hidden_field :user_id, value: current_user.id %>
@@ -37,7 +37,7 @@
           <% if question.type_id == 1 %>
             <% question.answers.each do |answer|%>
               <%= f.fields_for :user_answers do |ff| %>
-                <%= ff.hidden_field :exam_questions_id, value: get_exam_question_id(@exam.id, question.id) %>
+                <%= ff.hidden_field :exam_question_id, value: get_exam_question_id(@exam.id, question.id) %>
                 <%= answer.content %>
                 <%= ff.hidden_field :answers_id, value: answer.id  %>
                 <%= ff.check_box(:correct)%>
@@ -45,7 +45,7 @@
             <% end %>
           <% else %>
             <%= f.fields_for :user_answers do |ff| %>
-              <%= ff.hidden_field :exam_questions_id, value: get_exam_question_id(@exam.id, question.id) %>
+              <%= ff.hidden_field :exam_question_id, value: get_exam_question_id(@exam.id, question.id) %>
               <%= ff.text_field :content %>
             <% end %>
           <% end %>

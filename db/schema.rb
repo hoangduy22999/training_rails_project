@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_20_103438) do
+ActiveRecord::Schema.define(version: 2021_05_21_075908) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -97,18 +97,16 @@ ActiveRecord::Schema.define(version: 2021_05_20_103438) do
   end
 
   create_table "user_answers", force: :cascade do |t|
-    t.integer "users_id", null: false
-    t.integer "exam_questions_id", null: false
+    t.integer "exam_question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "content", null: false
+    t.string "content"
     t.integer "result_id"
     t.boolean "correct"
     t.integer "answers_id"
     t.index ["answers_id"], name: "index_user_answers_on_answers_id"
-    t.index ["exam_questions_id"], name: "index_user_answers_on_exam_questions_id"
+    t.index ["exam_question_id"], name: "index_user_answers_on_exam_question_id"
     t.index ["result_id"], name: "index_user_answers_on_result_id"
-    t.index ["users_id"], name: "index_user_answers_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -145,8 +143,7 @@ ActiveRecord::Schema.define(version: 2021_05_20_103438) do
   add_foreign_key "results", "users"
   add_foreign_key "tops", "results", column: "sorces_id"
   add_foreign_key "user_answers", "answers", column: "answers_id"
-  add_foreign_key "user_answers", "exam_questions", column: "exam_questions_id"
+  add_foreign_key "user_answers", "exam_questions"
   add_foreign_key "user_answers", "results"
-  add_foreign_key "user_answers", "users", column: "users_id"
   add_foreign_key "users", "schools"
 end
