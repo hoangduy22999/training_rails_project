@@ -23,36 +23,62 @@
                 </table>
               </div>
 </div>
-
+<span id="time_count_down"></span>
 <div class="card-body">
   <%= form_for @result, url: results_path(@result) do |f| %>
     <%= f.hidden_field :subject_id, value: @exam.subject_id %>
     <%= f.hidden_field :exam_id, value: @exam.id %>
     <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :time, id:"current_time"%>
+    <ul>
+      <% @questions.each.with_index(1) do |question,index| %>
+          <li><b><%= "Question #{index} : "%></b>
+          <%= question.content %>
+              <ul>
+                <% question.answers.each do |answer|%>
+                  <li>
+                    <%= f.fields_for :user_answers do |ff| %>
+                      <%= ff.hidden_field :exam_question_id, value: get_exam_question_id(@exam.id, question.id) %>
+                      <%= ff.hidden_field :answers_id, value: answer.id  %>
+                      <% if question.type_id == 1 %>
+                        <%= ff.check_box(:correct)%>
+                        <%= answer.content %>
+                      <% else %>
+                        <%= ff.text_field :content %>
+                      <% end %>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+          </li>
+        <% end %>
+      </ul>
 
-    <% @questions.each.with_index(1) do |question,index| %>
-        
-        <li><%= "Number #{index} : "%>
-        <%= question.content %></li>
-          <% if question.type_id == 1 %>
-            <% question.answers.each do |answer|%>
-              <%= f.fields_for :user_answers do |ff| %>
-                <%= ff.hidden_field :exam_question_id, value: get_exam_question_id(@exam.id, question.id) %>
-                <%= answer.content %>
-                <%= ff.hidden_field :answers_id, value: answer.id  %>
-                <%= ff.check_box(:correct)%>
-              <% end %>
-            <% end %>
-          <% else %>
-            <%= f.fields_for :user_answers do |ff| %>
-              <%= ff.hidden_field :exam_question_id, value: get_exam_question_id(@exam.id, question.id) %>
-              <%= ff.text_field :content %>
-            <% end %>
-          <% end %>
-
-        <br/>
-      <% end %>
-
-  <%= f.submit :Submit %>
+  <%= f.submit :Submit , id: "submit-form"%>
   <% end %>
 </div>
+
+<script>
+var countDownDate = new Date().getTime() + <%= @exam.time*60*1000 %>;
+
+var x = setInterval(function() {
+
+  var now = new Date().getTime();
+    
+  var distance = countDownDate - now;
+    
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  var current_time = (<%= @exam.time*60*1000 %> - distance)/1000/60;
+    
+  document.getElementById("time_count_down").innerHTML = hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  document.getElementById("current_time").value = current_time;
+    
+  if (distance < 0) {    
+    document.getElementById("submit-form").click();
+  }
+}, 1000);
+</script>

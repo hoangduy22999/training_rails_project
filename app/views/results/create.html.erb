@@ -1,23 +1,9 @@
-
-<p>Submit Complete!<p>
-<button class="btn btn-outline-primary" id="see-detail">See detail</button>
-<div id="detail-results">
-  <h3>Grade: </h3><h1><%= @grade %></h1>
-  <% @questions.each.with_index(1) do |question, index| %>
-    <%= "Number #{index} : "%>
-    <%= question.content %>
-    <% if question.type_id == 1 %>
-      <% question.answers.each do |answer| %>
-        <%= answer.content %>
-      <% end %>
-    <br />
-  <% end %>
+<div>
+    <h2>Submit Complete!</h2>
+    <%= form_tag(results_detail_path, method: "get", remote: true, class: 'd-inline') do %>
+        <%= submit_tag "See Detail", class: 'btn btn-outline-primary' %>
+    <% end %>
+    <%= link_to "All Exam", exams_show_path, class: 'btn btn-md btn-outline-primary' %>
 </div>
-
-<script>
-  $("#detail-results").hide()
-  $("#see-detail").click(function(){
-    $("#detail-results").toggle()
-  });
-
-</script>
+<div id="detail-results">
+</div>

@@ -14,10 +14,10 @@
       </tr>
     </thead>
     <tbody>
-      <% @search_result_exams.each_with_index do |exam, index| %>
+      <% @search_result_exams.each.with_index(1) do |exam, index| %>
         <tr>
-          <td><%= index + 1 %></td>
-          <td><%= exam.name %></td>
+          <td><%= index %></td>
+          <td><%= link_to exam.name, exam_detail_path(exam) %></td>
           <td><%= exam.questions.count %></td>
           <td><%= show_time_in_hour(exam.time) %></td>
           <td><%= exam.result_average %></td>

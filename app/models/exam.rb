@@ -9,7 +9,8 @@ class Exam < ApplicationRecord
   attribute :subject_id, :integer, default: 1 
 
   def result_average
-    self.result_average = self.results.sum(:value) / self.results.count 
+    result_count = self.results.count > 0 ? self.results.count : 1
+    self.result_average = self.results.sum(:value) / result_count
   end
 
   def subject_id

@@ -2,22 +2,43 @@ class ResultsController < ApplicationController
   MAX_POINTS = 100
 
   def create
-    result = Result.last
-    @questions = result.exam.questions    
-    @grade = get_result(result)
+    @result = Result.new(result_params)  
+    if @result.save
+      @result.update(:value=>get_result(@result))
+    else
+    end
+  end
+
+  def show
+    if @result = params[:format] ? Result.find(params[:format]) : current_user.results.last
+      @exam = @result.exam
+      @questions = @exam.questions.includes(:answers)
+      @user_answers = @result.user_answers
+      @grade = @result.value
+      render '_detail'
+    else 
+      redirect_to root_path
+    end
   end
   
-  def show
-    @result = params[:format] ? Result.find[params[:format]] : current_user.results.last
-    @exam = @result.exam
-    @questions = @exam.questions
-    @user_answers = @result.user_answers
-    render 'create'
+  def detail
+    if @result = params[:format] ? Result.find[params[:format]] : current_user.results.last
+      @exam = @result.exam
+      @questions = @exam.questions.includes(:answers)
+      @user_answers = @result.user_answers
+      @grade = @result.value
+      respond_to do |format|
+        format.html {}
+        format.js {}
+      end
+    else
+      redirect_to root_path
+    end
   end
 
   private
     def result_params
-      params.require(:result).permit(:subject_id, :exam_id, :user_id, 
+      params.require(:result).permit(:subject_id, :exam_id, :user_id, :time, 
                                       user_answers_attributes: [:exam_question_id, :answers_id, :content, :correct])
     end
 
@@ -26,7 +47,11 @@ class ResultsController < ApplicationController
     end
 
     def is_correct_choice(user_answer)
-      user_answer.correct == Answer.by_user_answer(user_answer).first.correct
+      user_answer.correct == Answer.by_user_answer(user_answer).first.correct && user_answer.correct
+    end
+
+    def is_not_correct(user_answer)
+      user_answer.correct && !Answer.by_user_answer(user_answer).first.correct
     end
 
     def get_question_type(user_answer)
@@ -43,12 +68,17 @@ class ResultsController < ApplicationController
           user_answer = get_answers(result, question).first
           grade += point if is_correct_write(user_answer)
         else
-          number_choice_correct = question.answers.is_correct.count
-          point_per_choice = point / number_choice_correct
-          user_answers = get_answers(result,question).is_correct
+          choice_corrects = question.answers.is_correct.count
+          choice_not_corrects = question.answers.is_not_correct.count
+          point_per_correct = point / choice_corrects
+          point_per_not_correct = - point / choice_not_corrects
+          point_for_question = 0
+          user_answers = get_answers(result,question)
           user_answers.each do |user_answer|
-            grade += point_per_choice if is_correct_choice(user_answer)
+            point_for_question +=  point_per_correct if is_correct_choice(user_answer)
+            point_for_question += point_per_not_correct if is_not_correct(user_answer)
           end
+          grade += point_for_question > 0 ? point_for_question : 0
         end
       end
       grade

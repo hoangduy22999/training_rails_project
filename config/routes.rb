@@ -11,14 +11,15 @@ Rails.application.routes.draw do
   get '/exams/show', to: 'exams#show'
   get '/exams/search', to: 'exams#search'
   get '/exam/detail', to: 'exams#detail'
-  post '/exam/detail', to: 'results#show'
+  post '/exam/detail', to: 'results#create'
 
   get '/question/create', to: 'questions#new'
   post '/question/create', to: 'questions#create'
   get '/question/search', to: 'questions#index'
   resource :questions
-  get 'results', to: 'results#show'
-  post 'results', to: 'results#create'
+  get '/results', to: 'results#show'
+  post '/results', to: 'results#create'
+  get '/results/detail', to: 'results#detail'
 
   get 'profile', to: 'static_pages#profile'
 
