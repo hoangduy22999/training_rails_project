@@ -1,0 +1,33 @@
+<h1>Grade: <%= @grade %>/100</h1>
+<h3>Time: <%= show_time_in_hour(@result.time) %></h3>
+<h5>At: <%= @result.created_at.to_formatted_s(:long) %> </h5>
+<ul>
+  <% @questions.each.with_index(1) do |question, index| %>
+    <li><b><%= "Question #{index} : "%></b>
+    <%= question.content %><br />
+      <% if question.type_id == 1 %>
+        <% question.answers.each.with_index(1) do |answer,index| %>
+            <%= "#{index} ." %>
+            <% if @result.get_user_answer_correct(answer) %>
+              <input type="checkbox" onclick="return false;" checked >
+              <p class="d-inline <%= answer.correct ? "text-success" : "text-danger text-decoration-line-through" %>">
+              <%= answer.content %></p>
+              <br />
+            <% else %>
+              <input type="checkbox" onclick="return false;">
+              <p class="d-inline"><%= answer.content %></p>
+              <br />
+            <% end %>
+
+        <% end %>
+      <% else %>
+          <p class="d-inline <%= @result.is_correct_write(question) ? "text-success" : "text-danger text-decoration-line-through"  %>">
+              <%= @result.get_user_answer_content(question.answers.first) %><p>
+          <% if !@result.is_correct_write(question) %>
+            <p class="d-inline text-success"><%= question.get_answer_write %></p>
+          <% end %>
+
+      <% end %>
+    </li>
+  <% end %>
+</ul>

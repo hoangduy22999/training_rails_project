@@ -9,4 +9,8 @@ class Question < ApplicationRecord
   scope :group_by_exam, ->exam{ where(exam_id: exam.id) }
 
   accepts_nested_attributes_for :answers, allow_destroy: true
+
+  def get_answer_write
+    self.answers.first.content
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_021643) do
+ActiveRecord::Schema.define(version: 2021_05_26_092945) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_021643) do
     t.integer "exam_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id", "question_id"], name: "index_exam_questions_on_exam_id_and_question_id", unique: true
     t.index ["exam_id"], name: "index_exam_questions_on_exam_id"
     t.index ["question_id"], name: "index_exam_questions_on_question_id"
   end
@@ -96,12 +97,16 @@ ActiveRecord::Schema.define(version: 2021_05_19_021643) do
   end
 
   create_table "user_answers", force: :cascade do |t|
-    t.integer "users_id", null: false
-    t.integer "exam_questions_id", null: false
+    t.integer "exam_question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["exam_questions_id"], name: "index_user_answers_on_exam_questions_id"
-    t.index ["users_id"], name: "index_user_answers_on_users_id"
+    t.string "content"
+    t.integer "result_id"
+    t.boolean "correct"
+    t.integer "answers_id"
+    t.index ["answers_id"], name: "index_user_answers_on_answers_id"
+    t.index ["exam_question_id"], name: "index_user_answers_on_exam_question_id"
+    t.index ["result_id"], name: "index_user_answers_on_result_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -137,7 +142,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_021643) do
   add_foreign_key "results", "subjects"
   add_foreign_key "results", "users"
   add_foreign_key "tops", "results", column: "sorces_id"
-  add_foreign_key "user_answers", "exam_questions", column: "exam_questions_id"
-  add_foreign_key "user_answers", "users", column: "users_id"
+  add_foreign_key "user_answers", "answers", column: "answers_id"
+  add_foreign_key "user_answers", "exam_questions"
+  add_foreign_key "user_answers", "results"
   add_foreign_key "users", "schools"
 end
