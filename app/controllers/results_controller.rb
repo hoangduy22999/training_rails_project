@@ -2,7 +2,7 @@ class ResultsController < ApplicationController
   MAX_POINTS = 100
 
   def create
-    @result = Result.new(result_params)  
+    @result = current_user.results.new(result_params)  
     if @result.save
       @result.update(:value=>get_result(@result))
     else
@@ -36,9 +36,14 @@ class ResultsController < ApplicationController
     end
   end
 
+  def mysubmitted
+    @results = Result.my_results(current_user).page(params[:page]).per(8)
+  end
+
+
   private
     def result_params
-      params.require(:result).permit(:subject_id, :exam_id, :user_id, :time, 
+      params.require(:result).permit(:subject_id, :exam_id, :time, 
                                       user_answers_attributes: [:exam_question_id, :answers_id, :content, :correct])
     end
 

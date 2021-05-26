@@ -8,9 +8,11 @@
       <tr>
         <th>#</th>
         <th>Name</th>
+        <th>Subject</th>
         <th>Questions</th>
         <th>Time</th>
         <th>Result</th>
+        <th>Submitted</th>
       </tr>
     </thead>
     <tbody>
@@ -18,11 +20,14 @@
         <tr>
           <td><%= index %></td>
           <td><%= link_to exam.name, exam_detail_path(exam) %></td>
+          <td><%= exam.get_subject_name.capitalize %></td>
           <td><%= exam.questions.count %></td>
           <td><%= show_time_in_hour(exam.time) %></td>
           <td><%= exam.result_average %></td>
+          <td><%= exam.get_results %></td>
         </tr>
       <% end %>
+      <%= paginate @search_result_exams %>
     </tbody>
   </table>
 </div>

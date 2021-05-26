@@ -23,7 +23,7 @@
                     <td><%= top.user.name %></td>
                     <td><%= top.value %></td>
                     <td><%= top.get_subject_name %></td>
-                    <td><%= top.time %></td>
+                    <td><%= show_time_in_hour(top.time) %></td>
                 </tr>
                 <% end %>
                 </tbody>
@@ -55,7 +55,7 @@
                     <td><%= top.user.name %></td>
                     <td><%= top.value %></td>
                     <td><%= top.get_subject_name %></td>
-                    <td><%= top.time %></td>
+                    <td><%= show_time_in_hour(top.time) %></td>
                 </tr>
                 <% end %>
                 </tbody>

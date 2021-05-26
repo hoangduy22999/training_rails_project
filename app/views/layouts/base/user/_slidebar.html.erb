@@ -12,22 +12,31 @@
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>
-      <ul class="nav nav-treeview">
-        <li class="nav-item">
-          <a href="/exams/show" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>All</p>
-          </a>
-        </li>
-        <% @subjects.each do |sb|%>
-        <li class="nav-item">
-          <a href="/exam-group/<%= sb[1] %>" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p><%= "#{sb.name}".capitalize() %></p>
-          </a>
-        </li>
-        <% end %>
-      </ul>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="/exams/show" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>All</p>
+            </a>
+          </li>
+          <% @subjects.each do |sb|%>
+          <li class="nav-item">
+            <a href="/exams/show?subject.<%= sb.id %>" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p><%= "#{sb.name}".capitalize() %></p>
+            </a>
+          </li>
+          <% end %>
+        </ul>
+      </li>
+
+      <li class="nav-iten">
+            <a href="/mysubmitted" class="nav-link">
+              <i class="fab fa-algolia"></i>
+              <p>
+                My Submitted
+              </p>
+            </a>
       </li>
 
     </ul>

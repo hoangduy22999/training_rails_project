@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get '/help', to: 'static_pages#help'
   get '/contact', to: 'static_pages#contact'
-
-  get '/exam-group/(:format)', to: 'exams#group'
+  get '/exam/submit', to: 'exams#submit'
   get '/exam/create', to: 'exams#new'
   post '/exam/create', to: 'exams#create'
   get '/exams/show', to: 'exams#show'
@@ -20,6 +19,7 @@ Rails.application.routes.draw do
   get '/results', to: 'results#show'
   post '/results', to: 'results#create'
   get '/results/detail', to: 'results#detail'
+  get '/mysubmitted', to: 'results#mysubmitted'
 
   get 'profile', to: 'static_pages#profile'
 

@@ -10,35 +10,38 @@ class ExamsController < ApplicationController
 
     def search
         if params[:search] || params[:time]
-            @search_result_exams = Exam.search_by_name(params[:search])
-            if params[:time]
-                time = params[:time].to_i
-                @search_result_exams = time <= 60 ? @search_result_exams.search_lt_time(time):
-                                                    @search_result_exams.search_gt_time(time)
-                # @search_results_exams = @search_results_exams.search_lt_time(params[:time].to_i) if params[:time].to_i <= 60
-                # @search_results_exams = @search_results_exams.search_gt_time(params[:time].to_i) if params[:time].to_i > 60
+            @search_result_exams = Exam.search_by_name(params[:search]).page(params[:page]).per(8)
+            if !params[:time].blank?
+                time = params[:time].to_i * 60
+                @search_result_exams = @search_result_exams.search_by_time(time)
             end
+            if !params[:questions].blank?
+                questions = params[:questions].to_i
+                @search_result_exams = @search_result_exams.search_by_questions(questions)
+            end
+
             respond_to do |format|
                 format.html {}
                 format.js {}
             end
         else
-            @search_result_exams = Exam.all
+            @search_result_exams = Exam.all.page(params[:page]).per(10)
         end
     end
 
     def show
-        @search_result_exams = Exam.all
+        @search_result_exams = Exam.all.page(params[:page]).per(10)
     end
     
     def detail
         @exam = Exam.find(params[:format])
         @questions = @exam.questions
-        @result = Result.new
-        @result.user_answers.build
     end
 
     def submit
-        @params = params
+        @exam = Exam.find(params[:format])
+        @questions = @exam.questions
+        @result = Result.new
+        @result.user_answers.build
     end
 end
