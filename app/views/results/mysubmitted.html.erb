@@ -22,8 +22,8 @@
             <td><%= index %>.</td>
             <td><%= link_to "#{result.exam.name}", results_path(result) %></td>
             <td><%= result.value %></td>
-            <td><%= result.get_subject_name %></td>
-            <td><%= show_time_in_hour(result.time) %></td>
+            <td><%= result.get_subject_name.capitalize %></td>
+            <td><%= show_minutes_seconds(result.time) %></td>
             <td><%= result.created_at.to_formatted_s(:long) %></td>
         </tr>
         <% end %>

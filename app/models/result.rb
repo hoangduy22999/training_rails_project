@@ -4,7 +4,8 @@ class Result < ApplicationRecord
   has_many :user_answers, dependent: :destroy
 
   scope :my_results, ->user{ where(user_id: user.id) }
-  scope :top, ->{ order(:value, :desc).last(5).reverse()}
+  scope :top, ->{ order(:value, :desc).last(5).reverse }
+  scope :top_user, ->{ order(:value, :desc).group(:user_id) }
 
   accepts_nested_attributes_for :user_answers, allow_destroy: true
 

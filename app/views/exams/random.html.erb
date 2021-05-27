@@ -1,0 +1,13 @@
+<div>
+    <%= form_tag do %>
+        <%= label_tag "time:"%>
+        <%= select_tag :time, options_for_select([["Random",0],["15m",15],["45m",45],["90m",90]]), class: 'form-select col-sm-2 d-inline' %>
+        <%= label_tag "subject:"%>
+        <%= select_tag :subject, options_for_select(@subject), class: 'form-select col-sm-2 d-inline' %>
+        <%= label_tag "questions:"%>
+        <%= select_tag :questions, options_for_select([["Random", 0],["5",5],["10",10],["15",20]]), class: 'form-select col-sm-2 d-inline' %>
+        <%= label_tag "question_type:" %>
+        <%= select_tag :question_type, options_for_select(question_type.unshift(["Random",0])), class: 'form-select col-sm-2 d-inline' %>
+        <%= submit_tag "Start", class: 'btn btn-primary d-block' %>
+    <% end %>
+</div>

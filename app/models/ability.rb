@@ -7,10 +7,9 @@ class Ability
     alias_action :create, :read, :update, :destroy, to: :crud
     can :read, :all
     if user.present?
-      can :create, UserAnswer     
+      can :create, UserAnswer, Exam     
       if user.admin?
         can :crud, User, admin_role: false
-        can :crud, [Exam,Question,Answer]
       end
     end
     # Define abilities for the passed in user here. For example:

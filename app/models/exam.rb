@@ -5,10 +5,8 @@ class Exam < ApplicationRecord
   validates :user_id, presence: true
   has_many :results,dependent: :destroy
 
-  before_save :set_subject_id
 
   attribute :result_average, :integer, default: 0
-  attribute :subject_id, :integer, default: 1 
 
   def result_average
     result_count = self.results.count > 0 ? self.results.count : 1
@@ -25,11 +23,7 @@ class Exam < ApplicationRecord
   end
 
   def get_subject_name
-    Subject.find(self.subject_id).name
-  end
-
-  def set_subject_id
-    questions.select(:subject_id).distinct.count == 1 ? questions.first.subject_id : 1
+    Subject.find(self.subject_id.nil? ? 1 : self.subject_id).name
   end
 
   def get_exam_question_id(question)

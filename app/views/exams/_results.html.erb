@@ -22,7 +22,7 @@
           <td><%= link_to exam.name, exam_detail_path(exam) %></td>
           <td><%= exam.get_subject_name.capitalize %></td>
           <td><%= exam.questions.count %></td>
-          <td><%= show_time_in_hour(exam.time) %></td>
+          <td><%= "#{exam.time/60}m" %></td>
           <td><%= exam.result_average %></td>
           <td><%= exam.get_results %></td>
         </tr>

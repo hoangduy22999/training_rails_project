@@ -2,8 +2,8 @@ class ResultsController < ApplicationController
   MAX_POINTS = 100
 
   def create
-    @result = current_user.results.new(result_params)  
-    if @result.save
+    @result = current_user.results.new(result_params) 
+    if @result.save!
       @result.update(:value=>get_result(@result))
     else
     end
@@ -40,6 +40,11 @@ class ResultsController < ApplicationController
     @results = Result.my_results(current_user).page(params[:page]).per(8)
   end
 
+  def top
+    @top_user = Result.top_user
+    @my_result = Result.my_results(current_user).last(5)
+  end
+
 
   private
     def result_params
@@ -73,10 +78,10 @@ class ResultsController < ApplicationController
           user_answer = get_answers(result, question).first
           grade += point if is_correct_write(user_answer)
         else
-          choice_corrects = question.answers.is_correct.count
+          choice_corrects = question.answers.is_correct.count 
           choice_not_corrects = question.answers.is_not_correct.count
-          point_per_correct = point / choice_corrects
-          point_per_not_correct = - point / choice_not_corrects
+          point_per_correct = choice_corrects == 0 ? 0 : point / choice_corrects
+          point_per_not_correct = choice_not_corrects == 0 ? 0 : - point / choice_not_corrects
           point_for_question = 0
           user_answers = get_answers(result,question)
           user_answers.each do |user_answer|

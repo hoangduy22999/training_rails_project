@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
 
     def new
         @question = Question.new
-        @subjects = Subject.all
+        @subject = Subject.all.map{ |sb| [sb.name.capitalize, sb.id]  }
         @question.answers.build
     end
 
@@ -21,13 +21,22 @@ class QuestionsController < ApplicationController
     end
     
     def create
-        @params = question_params
-        render 'show'
+        @question = Question.new(question_params)
+        if @question.save!
 
+            flash[:success] = "Create Question Success!"
+            redirect_to question_create_path
+        else
+            flash[:warning] = "Create Question Fails" 
+            redirect_to question_create_path
+        end
+        @question = Question.new
+        @subject = Subject.all.map{ |sb| [sb.name.capitalize, sb.id]  }
+        @question.answers.build
     end
 
     private
         def question_params
-            params.require(:question).permit(:content, answers_attributes: [:content])
+            params.require(:question).permit(:content, answers_attributes: [:content, :correct])
         end
 end

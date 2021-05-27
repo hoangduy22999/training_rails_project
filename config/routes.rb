@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/exams/search', to: 'exams#search'
   get '/exam/detail', to: 'exams#detail'
   post '/exam/detail', to: 'results#create'
+  get '/exam/random', to: 'exams#random'
+  post '/exam/random', to: 'exams#create_random'
 
   get '/question/create', to: 'questions#new'
   post '/question/create', to: 'questions#create'
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
   post '/results', to: 'results#create'
   get '/results/detail', to: 'results#detail'
   get '/mysubmitted', to: 'results#mysubmitted'
+  get '/results/top', to: 'results#top'
 
   get 'profile', to: 'static_pages#profile'
 
