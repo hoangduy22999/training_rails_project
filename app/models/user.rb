@@ -23,4 +23,15 @@ class User < ApplicationRecord
     def admin?
         self.admin_role?
     end
+
+    def get_results_average
+        result_count = self.results.count > 0 ? self.results.count : 1
+        self.results.sum(:value) / result_count
+    end
+
+    def get_max_results
+        
+    end
+
+    scope :top_user, ->{ joins(:results).order("results.value").group(:id) }
 end

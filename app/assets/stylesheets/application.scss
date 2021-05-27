@@ -43,7 +43,7 @@ body{
         border: none;
     }
 
-    .active  a {
+    .active  a , .current{
         background-color: rgb(39, 131, 216);
         color: #DDD;
     }

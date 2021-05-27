@@ -20,17 +20,17 @@
         <td><%= @exam.name %></td>
         <td><%= @exam.questions.count %></td>
         <td><%= @exam.get_subject_name.capitalize %></td>
-        <td><%= show_time_in_hour(@exam.time) %></td>
+        <td><%= "#{@exam.time/60}m" %></td>
         <td><%= @exam.get_results %></td>
         <td><%= @exam.result_average %></td>
-        <td><%= show_time_in_hour(@exam.time_average) %></td>
+        <td><%= show_minutes_seconds(@exam.time_average) %></td>
       </tr>
       </tbody>
     </table>
   </div>
 
   <div>
-    <%= link_to "AAAA", exam_submit_path(@exam), class: 'btn btn-primary me-4 mb-1 float-sm-right' %>
+    <%= link_to "Start", exam_submit_path(@exam), class: 'btn btn-primary me-4 mb-1 float-sm-right' %>
   </div>
 </div>
 

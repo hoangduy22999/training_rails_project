@@ -12,7 +12,7 @@
   <% if user_signed_in? %>
   <body>
     <div class="">
-    <% @subjects  = [ ] %>
+    <% @subjects  = Subject.all %>
     <%= render 'layouts/base/admin/header'%>
       <% if current_user.admin? %>
         <%= render 'layouts/base/admin/slidebar'%>
