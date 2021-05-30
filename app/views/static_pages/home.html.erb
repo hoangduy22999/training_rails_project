@@ -6,7 +6,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table">
                 <thead>
                 <tr>
                     <th style="width: 10px">#</th>
@@ -17,17 +17,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% @result_top.each_with_index do |top,index| %>
+                <% @result_top.each.with_index(1) do |top,index| %>
                 <tr>
-                    <td><%= index+1 %>.</td>
+                    <td><%= index %>.</td>
                     <td><%= top.user.name %></td>
                     <td><%= top.value %></td>
-                    <td><%= top.subject_id %></td>
-                    <td><%= top.time %></td>
+                    <td><%= top.get_subject_name.capitalize %></td>
+                    <td><%= show_minutes_seconds(top.time) %></td>
                 </tr>
                 <% end %>
                 </tbody>
             </table>
+            <%= link_to "Show more" , results_top_path %>
             </div>
         </div>
     </div>
@@ -38,7 +39,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table">
                 <thead>
                 <tr>
                     <th style="width: 10px">#</th>
@@ -49,17 +50,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% @my_result.each_with_index do |top,index| %>
+                <% @my_result.each.with_index(1) do |top,index| %>
                 <tr>
-                    <td><%= index+1 %>.</td>
+                    <td><%= index %>.</td>
                     <td><%= top.user.name %></td>
                     <td><%= top.value %></td>
-                    <td><%= top.subject_id %></td>
-                    <td><%= top.time %></td>
+                    <td><%= top.get_subject_name.capitalize %></td>
+                    <td><%= show_minutes_seconds(top.time) %></td>
                 </tr>
                 <% end %>
-                </tbody>
+                </tbody>                    
             </table>
+            <%= link_to "Show more", mysubmitted_path %>
             </div>
         </div>
     </div>
