@@ -5,8 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
     attr_accessor :remember_token
     has_many :exams, dependent: :destroy
-    has_many :exam_questions, through: :user_answers
-    has_many :results, dependent: :destroy
+    has_many :results, dependent: :nullify
     belongs_to :school, optional: true
 
     # validates :name, presence: true
@@ -29,9 +28,10 @@ class User < ApplicationRecord
         self.results.sum(:value) / result_count
     end
 
-    def get_max_results
-        
+    def get_submitted
+        self.results.count
     end
 
     scope :top_user, ->{ joins(:results).order("results.value").group(:id) }
+    scope :user, ->{ where(admin_role: false) }
 end

@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @search_result_exams.each.with_index(1) do |exam, index| %>
+      <% @exams.each.with_index(1) do |exam, index| %>
         <tr>
           <td><%= index %></td>
           <td><%= link_to exam.name, exam_detail_path(exam) %></td>
@@ -27,7 +27,7 @@
           <td><%= exam.get_results %></td>
         </tr>
       <% end %>
-      <%= paginate @search_result_exams %>
+      <%= paginate @exams %>
     </tbody>
   </table>
 </div>

@@ -1,12 +1,13 @@
 class Exam < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :exam_questions, dependent: :destroy
   has_many :questions, through: :exam_questions
-  validates :user_id, presence: true
-  has_many :results,dependent: :destroy
+  has_many :results, dependent: :nullify
 
 
   attribute :result_average, :integer, default: 0
+
+  validates :user_id, presence: true
 
   def result_average
     result_count = self.results.count > 0 ? self.results.count : 1

@@ -1,4 +1,4 @@
-<span id="time_count_down"></span>
+<h2 class= "d-flex justify-content-center" id="time_count_down"></h2>
 <div class="card-body">
   <%= form_for @result, url: results_path(@result) do |f| %>
     <%= f.hidden_field :subject_id, value: @exam.subject_id %>
@@ -44,7 +44,7 @@
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     var current_time = (<%= @exam.time*1000 %> - distance)/1000;
       
-    document.getElementById("time_count_down").innerHTML = hours + "h "
+    document.getElementById("time_count_down").innerHTML = "Time: " + hours + "h "
     + minutes + "m " + seconds + "s ";
 
     document.getElementById("current_time").value = current_time;

@@ -27,7 +27,7 @@
           </li>
           <% @subjects.each do |sb|%>
           <li class="nav-item">
-            <a href="/exams/show?subject=<%= sb.id %>" class="nav-link">
+            <a href="/exams/show.<%= sb.id %>" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p><%= "#{sb.name}".capitalize() %></p>
             </a>

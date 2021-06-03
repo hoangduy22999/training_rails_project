@@ -20,7 +20,7 @@
         <% @results.each.with_index(1) do |result,index| %>
         <tr>
             <td><%= index %>.</td>
-            <td><%= link_to "#{result.exam.name}", results_path(result) %></td>
+            <td><% if result.get_exam_name != "Deleted" %><%= link_to "#{result.get_exam_name}", results_path(result) %><% else %>Deleted<% end %></td>
             <td><%= result.value %></td>
             <td><%= result.get_subject_name.capitalize %></td>
             <td><%= show_minutes_seconds(result.time) %></td>

@@ -1,6 +1,8 @@
-<h1>Grade: <%= @grade %>/100</h1>
-<h3>Time: <%= show_minutes_seconds(@result.time) %></h3>
-<h5>At: <%= @result.created_at.to_formatted_s(:long) %> </h5>
+<div>
+  <h1 class="d-flex justify-content-center text-success">Grade: <%= @grade %>/100</h1>
+  <h3 class="d-flex justify-content-center">Time: <%= show_minutes_seconds(@result.time) %></h3>
+  <h5 class="d-flex justify-content-center">At: <%= @result.created_at.to_formatted_s(:long) %> </h5>
+</div>
 <ul>
   <% @questions.each.with_index(1) do |question, index| %>
     <li><b><%= "Question #{index} : "%></b>
@@ -18,14 +20,14 @@
               <p class="d-inline <%= "text-success" if answer.correct %>" ><%= answer.content %></p>
               <br />
             <% end %>
-
         <% end %>
       <% else %>
           <input type="text" value ="<%= @result.get_user_answer_content(question.answers.first) %>" readonly></input>             
           <% if !@result.is_correct_write(question) %>
             <p class="d-inline text-danger">Not Correct! <p class="text-success">Answers: <b><%= question.get_answer_write %></b></p></p>
+          <% else %>
+            <p class="d-inline text-success">Correct!</p>
           <% end %>
-
       <% end %>
     </li>
   <% end %>

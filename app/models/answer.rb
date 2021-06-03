@@ -1,10 +1,5 @@
 class Answer < ApplicationRecord
-  belongs_to :questions,  optional: true
-  before_save :downcase_fields
-
-  def downcase_fields
-      self.content.downcase!
-  end
+  belongs_to :questions, optional: true
 
   scope :is_correct, ->{where correct: true}
   scope :is_not_correct, ->{where correct: false}

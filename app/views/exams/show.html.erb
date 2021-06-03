@@ -3,7 +3,7 @@
         <%= label_tag "name:"%>
         <%= text_field_tag :search, params[:search], class: 'form-control col-sm-4 d-inline', placeholder: "Enter search term" %>
         <%= label_tag "time:"%>
-        <%= select_tag :time, options_for_select([[""],["15m",15],["45m",45],["90m",90]]), class: 'form-select col-sm-1 d-inline' %>
+        <%= select_tag :time, options_for_select([[""],["15m",15*60],["45m",45*60],["90m",90*60]]), class: 'form-select col-sm-1 d-inline' %>
         <%= label_tag "subject:"%>
         <%= select_tag :subject, options_for_select(@subject), class: 'form-select col-sm-2 d-inline' %>
         <%= label_tag "questions:"%>
@@ -13,38 +13,36 @@
 </div>
 
 <div class="card" id="search-results">
-              <div class="card-header">
-                <h3 class="card-title">Exam</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Subject</th>
-                    <th>Questions</th>
-                    <th>Time</th>
-                    <th>Result Average</th>
-                    <th>Submitted</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <% @search_result_exams.each_with_index do |exam, index| %>
-                  <tr>
-                    <td><%= index + 1  %></td>
-                    <td><%= link_to "#{exam.name}", exam_detail_path(exam) %></td>
-                    <td><%= exam.get_subject_name.capitalize %></td>
-                    <td><%= exam.questions.count %></td>
-                    <td><%= "#{exam.time/60}m" %></td>
-                    <td><%= exam.result_average %></td>
-                    <td><%= exam.get_results %></td>
-                  </tr>
-                  <% end %>
-                  <%= paginate @search_result_exams %>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
+  <div class="card-header">
+    <h3 class="card-title">Exam</h3>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Questions</th>
+          <th>Time</th>
+          <th>Result Average</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @exams.each_with_index do |exam, index| %>
+        <tr>
+          <td><%= index + 1  %></td>
+          <td><%= link_to "#{exam.name}", exam_detail_path(exam) %></td>
+          <td><%= exam.get_subject_name.capitalize %></td>
+          <td><%= exam.questions.count %></td>
+          <td><%= "#{exam.time/60}m" %></td>
+          <td><%= exam.result_average %></td>
+          <td><%= exam.get_results %></td>
+        </tr>
+        <% end %>
+        <%= paginate @exams %>
+      </tbody>
+    </table>
+  </div>
 </div>

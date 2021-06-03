@@ -22,8 +22,9 @@ class ResultsController < ApplicationController
   end
   
   def detail
-    if @result = params[:format] ? Result.find[params[:format]] : current_user.results.last
+    if @result = params[:format] ? Result.find(params[:format]) : current_user.results.last
       @exam = @result.exam
+      redirect_to :back if @exam.nil?
       @questions = @exam.questions.includes(:answers)
       @user_answers = @result.user_answers
       @grade = @result.value

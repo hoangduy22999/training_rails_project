@@ -2,19 +2,19 @@
     <%= form_for @question do |f| %>
       <div class="question">
         <%= f.label "question:", class:"form-label col-sm-1" %>
-        <%= f.text_field :content, class: "form-control col-sm-10 d-inline", required: "required" %>
+        <%= f.text_field :content, class: "form-control col-sm-10 mb-2 d-inline", required: "required" %>
         </br>
         <%= f.label "type:", class: "form-label col-sm-1"%>
-        <%= f.select :type_id, options_for_select(question_type, 2),{}, class: 'form-select col-sm-2 d-inline' %>
+        <%= f.select :type_id, options_for_select(question_type, 2),{}, class: 'form-select mb-2 col-sm-2 d-inline' %>
         <%= f.label "subject:", class:"form-label col-sm-1" %>
-        <%= f.select :subject_id, options_for_select(@subject),{}, class: 'form-select col-sm-2 d-inline' %>
+        <%= f.select :subject_id, options_for_select(@subject),{}, class: 'form-select col-sm-2 mb-2 d-inline' %>
         <div id="add-answer-btn">
         </div>
       </div>
         <div class="answer-group">
         </div>
         </div>
-        <%= f.submit nil , :class=> 'col-sm-2 btn btn-primary' %>
+        <%= f.submit nil , :class=> 'col-sm-2 btn mt-2 btn-primary' %>
         </div>        
     <% end %>
 </div>
@@ -38,7 +38,7 @@
 
   function answer_choice_form(){
     var index = new Date().getTime();
-    return "<div class='answer-choice'><label class='form-label col-sm-1' for='question_answers_attributes_1_answer:'>Answer:</label>\
+    return "<div class='answer-choice mb-2'><label class='form-label col-sm-1' for='question_answers_attributes_1_answer:'>Answer:</label>\
     <input class='form-control col-sm-7 d-inline' required='required' type='text'\
     name='question[answers_attributes]["+index+"][content]' id='question_answers_attributes_"+index+"_content'>\
     <select class='form-select col-sm-1 d-inline' name='question[answers_attributes]["+index+"][correct]' id='question_answers_attributes_"+index+"_correct'><option value='true'>true</option>\
@@ -47,7 +47,7 @@
 
   function answer_write_form(){
     var index = new Date().getTime();
-    return "<div><label class='form-label col-sm-1' for='question_answers_attributes_1_answer:'>Answer:</label>\
+    return "<div><label class='form-label col-sm-1 mb-2' for='question_answers_attributes_1_answer:'>Answer:</label>\
     <input class='form-control col-sm-9 d-inline' required='required' type='text'\
     name='question[answers_attributes]["+index+"][content]' id='question_abutton_delnswers_attributes_"+index+"_content'>\
     <select class='form-select col-sm-1 d-inline' name='question[answers_attributes]["+index+"][correct]' id='question_answers_attributes_"+index+"_correct'><option value='true' selected>true</option>\

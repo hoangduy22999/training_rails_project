@@ -20,7 +20,7 @@
                 <% @top_user.each.with_index(1) do |top,index| %>
                 <tr>
                     <td><%= index %>.</td>
-                    <td><%= top.user.name %></td>
+                    <td><%= top.get_user_name %></td>
                     <td><%= top.value %></td>
                     <td><%= top.get_subject_name.capitalize %></td>
                     <td><%= show_minutes_seconds(top.time) %></td>
@@ -32,36 +32,36 @@
         </div>
     </div>
     <div class="col-md-6">
-    <div class="card">
-        <div class="card-header">
-        <h3 class="card-title">My Result</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-        <table class="table">
-            <thead>
-            <tr>
-                <th style="width: 10px">#</th>
-                <th>User</th>
-                <th>Result</th>
-                <th>Subject</th>
-                <th style="width: 100px">Time</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @my_result.each.with_index(1) do |top,index| %>
-            <tr>
-                <td><%= index %>.</td>
-                <td><%= top.user.name %></td>
-                <td><%= top.value %></td>
-                <td><%= top.get_subject_name.capitalize %></td>
-                <td><%= show_minutes_seconds(top.time) %></td>
-            </tr>
-            <% end %>
-            </tbody>                    
-        </table>
-        <%= link_to "Show more", mysubmitted_path %>
+        <div class="card">
+            <div class="card-header">
+            <h3 class="card-title">My Result</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>User</th>
+                    <th>Result</th>
+                    <th>Subject</th>
+                    <th style="width: 100px">Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @my_result.each.with_index(1) do |top,index| %>
+                <tr>
+                    <td><%= index %>.</td>
+                    <td><%= top.get_user_name %></td>
+                    <td><%= top.value %></td>
+                    <td><%= top.get_subject_name.capitalize %></td>
+                    <td><%= show_minutes_seconds(top.time) %></td>
+                </tr>
+                <% end %>
+                </tbody>                    
+            </table>
+            <%= link_to "Show more", mysubmitted_path %>
+            </div>
         </div>
     </div>
-</div>
 </div>

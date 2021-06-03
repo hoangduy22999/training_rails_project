@@ -1,0 +1,90 @@
+<% if @exams %>
+  <div class="card" id="search-results">
+    <div class="card-header">
+      <h3 class="card-title">My Exam</h3>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Subject</th>
+            <th>Questions</th>
+            <th>Time</th>
+            <th>Result Average</th>
+            <th>Submitted</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @exams.each_with_index do |exam, index| %>
+          <tr>
+            <td><%= index + 1  %></td>
+            <td><%= link_to "#{exam.name}", exam_path(exam) %></td>
+            <td><%= exam.get_subject_name.capitalize %></td>
+            <td><%= exam.questions.count %></td>
+            <td><%= "#{exam.time/60}m" %></td>
+            <td><%= exam.result_average %></td>
+            <td><%= exam.get_results %></td>
+          </tr>
+          <% end %>
+          <%= paginate @exams %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% else %>
+  <div class="card" id="search-results">
+    <div>
+      <%= form_for @exam do |f| %>
+        <div class="box-body">          
+          <%= f.label :"Name:", class: "col-sm-2" %>
+          <%= f.text_field :name,  class: "form-control col-sm-9 ms-2 mb-2 d-inline", required: "required" %>
+          <br />
+          <%= f.label "time:", class: "col-sm-2" %>
+          <%= f.select :time, options_for_select([["15m",15*60],["45m",45*60],["90m",90*60]], @exam.time), {}, class: 'form-select col-sm-2 ms-2 mb-2 d-inline', required: "required" %>
+          <br />
+          <%= f.label "Questions:", class: "col-sm-2" %>
+          <div class="ms-2 d-inline h-4">
+            <%= select_tag :questions, options_for_select(@questions, selected: f.object.questions.ids), {class: 'js-example-basic-multiple col-sm-6',name: "questions[]", multiple: "multiple"} %>
+          </div>
+        </div>
+        <div class="box-footer clearfix">
+          <%= f.submit "Update Exam", class: "btn btn-sm btn-info btn-flat pull-left btn-add mt-4 mb-2 ms-2 " %>
+          <%= link_to "Delete Exam", exam_delete_path(@exam) , data: { confirm: 'Are you sure?' }, method: :post, class: 'btn btn-sm btn-danger btn-flat pull-left btn-add mt-3' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2({
+      placeholder: "Select a question",
+      require: "required", 
+      ajax:{
+        url: 'exam/find_question',
+        dataType: 'json',
+        data: function(params){
+          var questionID = $(this).val();
+          return { search_content: params.term, selected_question_id: questionID }
+        },
+        processResults: function(data){
+          return { results: data.results};
+        },
+      },
+      templateResult: formatResult,
+  
+    }).trigger('change');
+  
+    function formatResult(question) {
+      return question.content;
+    }
+    
+    function formatSelection(question) {
+      return question.content || question.text;
+    }
+  
+  });
+</script>
