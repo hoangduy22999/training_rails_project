@@ -5,30 +5,34 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body class="hold-transition sidebar-mini">
-  <% if user_signed_in?%>
-    <div class="wrapper h-100">
-    <% @subjects  ||= [] %>
-    <%= render 'layouts/base/admin/header'%>
-      <% if current_user.admin? %>
-        <%= render 'layouts/base/admin/slidebar'%>
-      <% else%>
-        <%= render 'layouts/base/user/slidebar' %>
-      <% end %>
-    
-  <% end %>
-    <div class="content-wrapper">
-      <div class="container-fluid">
-        <% flash.each do |message_type, message| %>
-          <div class="alert alert-<%= message_type %>"><%= message %></div>
-        <% end %>
+  <% if user_signed_in? %>
+    <body class="hold-transition sidebar-mini layout-fixed">
+      <div class="wrapper">
+        <% @subjects  = Subject.all %>
+        <%= render 'layouts/base/admin/header'%>
+          <% if current_user.admin? %>
+            <%= render 'layouts/base/admin/slidebar'%>
+          <% else%>
+            <%= render 'layouts/base/user/slidebar' %>
+          <% end %>
+          <div class="content-wrapper d-100">
+            <div class="container-fluid">
+              <section class="content">
+                <div class="container-fluid">
+                  <% flash.each do |message_type, message| %>
+                    <div class="alert alert-<%= message_type %>"><%= message %></div>
+                  <% end %>
+                  <%= yield %>
+                </div>
+              </section>
+            </div>
+          </div>
       </div>
-      <%= yield %>
-    </div>
-    </div>
-  </body>
+    </body>
+  <% else %>
+    <%= yield %>
+  <% end %>
 </html>

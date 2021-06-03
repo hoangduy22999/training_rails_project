@@ -1,0 +1,35 @@
+<div class="col-md">
+<div class="card">
+    <div class="card-header">
+    <h3 class="card-title">My Result</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th style="width: 10px">#</th>
+            <th class="w-20">Exam</th>
+            <th>Result</th>
+            <th>Subject</th>
+            <th class="">Time</th>
+            <th>At</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @results.each.with_index(1) do |result,index| %>
+        <tr>
+            <td><%= index %>.</td>
+            <td><% if result.get_exam_name != "Deleted" %><%= link_to "#{result.get_exam_name}", results_path(result) %><% else %>Deleted<% end %></td>
+            <td><%= result.value %></td>
+            <td><%= result.get_subject_name.capitalize %></td>
+            <td><%= show_minutes_seconds(result.time) %></td>
+            <td><%= result.created_at.to_formatted_s(:long) %></td>
+        </tr>
+        <% end %>
+        <%= paginate @results, theme: 'twitter-bootstrap-3' %>
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>

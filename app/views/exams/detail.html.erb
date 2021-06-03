@@ -1,0 +1,38 @@
+<div class="card" id="search-results">
+  <div class="card-header">
+    <h3 class="card-title">Exam</h3>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Questions</th>
+          <th>Subject</th>
+          <th>Time</th>
+          <th>Submitted</th>
+          <th>Result Average</th>
+          <th>Time Average</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @exam.name %></td>
+          <td><%= @exam.questions.count %></td>
+          <td><%= @exam.get_subject_name.capitalize %></td>
+          <td><%= "#{@exam.time/60}m" %></td>
+          <td><%= @exam.get_results %></td>
+          <td><%= @exam.result_average %></td>
+          <td><%= show_minutes_seconds(@exam.time_average) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <%= link_to "Start", exam_submit_path(@exam), class: 'btn btn-primary me-4 mb-1 float-sm-right' %>
+  </div>
+</div>
+
+
+

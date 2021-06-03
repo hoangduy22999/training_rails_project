@@ -8,6 +8,10 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "bootstrap";
 import "../stylesheets/application.scss";
+import 'select2'
+import 'select2/dist/css/select2.css'
+
+//= require select2
 
 Rails.start()
 Turbolinks.start()
@@ -21,3 +25,9 @@ window.$ = window.jQuery = jQuery;
 require('admin-lte');
 
 import "@fortawesome/fontawesome-free/css/all.min";
+
+
+window.addEventListener('DOMContentLoaded', () => {
+})
+
+

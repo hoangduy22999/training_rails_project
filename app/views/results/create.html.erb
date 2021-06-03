@@ -1,0 +1,9 @@
+<div>
+    <h2>Submit Complete!</h2>
+    <%= form_tag(results_detail_path, method: "get", remote: true, class: 'd-inline') do %>
+        <%= submit_tag "See Detail", class: 'btn btn-outline-primary' %>
+    <% end %>
+    <%= link_to "All Exam", exams_show_path, class: 'btn btn-md btn-outline-primary' %>
+</div>
+<div id="detail-results">
+</div>

@@ -5,29 +5,51 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
       
       <li class="nav-item has-treeview">
-      <a href="#" class="nav-link">
-        <i class="fas fa-chart-bar"></i>
-        <p>
-          Exam
-          <i class="right fas fa-angle-left"></i>
-        </p>
-      </a>
-      <ul class="nav nav-treeview">
-        <li class="nav-item">
-          <a href="/exams/show" class="nav-link">
+        <a href="#" class="nav-link">
+          <i class="fas fa-chart-bar"></i>
+          <p>
+            Exam
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="/exams/show" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>All</p>
+            </a>
+          </li>
+          <li>
+            <a href="/exam/random" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>All</p>
-          </a>
-        </li>
-        <% @subjects.each do |sb|%>
-        <li class="nav-item">
-          <a href="/exam-group/<%= sb[1] %>" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p><%= "#{sb.name}".capitalize() %></p>
-          </a>
-        </li>
-        <% end %>
-      </ul>
+            <p>Random Exam</p>
+            </a>
+          </li>
+          <% @subjects.each do |sb|%>
+          <li class="nav-item">
+            <a href="/exams/show.<%= sb.id %>" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p><%= "#{sb.name}".capitalize() %></p>
+            </a>
+          </li>
+          <% end %>
+        </ul>
+      </li>
+
+      <li class="nav-iten">
+        <a href="/mysubmitted" class="nav-link">
+          <i class="fab fa-algolia"></i>
+          <p>
+            My Submitted
+          </p>
+        </a>
+      </li>
+
+      <li>
+        <a href ="/results/top" class="nav-link">
+          <i class="fas fa-chart-line"></i>
+          <p>Top</p>
+        </a>
       </li>
 
     </ul>

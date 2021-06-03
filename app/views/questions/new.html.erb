@@ -1,9 +1,74 @@
-<%= form_for @question do |ques| %>
-    <%= ques.label :content %>
-    <%= ques.text_field :content %>
-
-    <%= fields_for :answer do |ans| %>
-        <%= ans.label :content %>
-        <%= ans.text_field :content %>
+<div class="hold-transition">
+    <%= form_for @question do |f| %>
+      <div class="question">
+        <%= f.label "question:", class:"form-label col-sm-1" %>
+        <%= f.text_field :content, class: "form-control col-sm-10 mb-2 d-inline", required: "required" %>
+        </br>
+        <%= f.label "type:", class: "form-label col-sm-1"%>
+        <%= f.select :type_id, options_for_select(question_type, 2),{}, class: 'form-select mb-2 col-sm-2 d-inline' %>
+        <%= f.label "subject:", class:"form-label col-sm-1" %>
+        <%= f.select :subject_id, options_for_select(@subject),{}, class: 'form-select col-sm-2 mb-2 d-inline' %>
+        <div id="add-answer-btn">
+        </div>
+      </div>
+        <div class="answer-group">
+        </div>
+        </div>
+        <%= f.submit nil , :class=> 'col-sm-2 btn mt-2 btn-primary' %>
+        </div>        
     <% end %>
-<% end %>
+</div>
+
+<script>
+  var button_del = "<button id='btn-del' type='button' onclick='del_btn($(this))' class='btn btn-outline-danger ms-1 btn-del col-sm-1'>Delete</button>";
+  var button_add = "<button type='button' onclick='add_btn()' class='btn btn-outline-primary ms-1 btn-add col-sm-1'>Add</button>";
+  function check_question_type(){
+      var text=$('#question_type_id').val();
+      if(text==1){
+        $('.answer-group').empty();
+        $('.answer-group').append(answer_choice_form)
+        $('.answer-group div:first-child div').append(button_add)
+      }else{
+        $('.answer-group').empty();
+        $('.answer-group').append(answer_write_form());
+      }     
+  }
+
+  $('#question_type_id').change(check_question_type);
+
+  function answer_choice_form(){
+    var index = new Date().getTime();
+    return "<div class='answer-choice mb-2'><label class='form-label col-sm-1' for='question_answers_attributes_1_answer:'>Answer:</label>\
+    <input class='form-control col-sm-7 d-inline' required='required' type='text'\
+    name='question[answers_attributes]["+index+"][content]' id='question_answers_attributes_"+index+"_content'>\
+    <select class='form-select col-sm-1 d-inline' name='question[answers_attributes]["+index+"][correct]' id='question_answers_attributes_"+index+"_correct'><option value='true'>true</option>\
+    <option value='false'>false</option></select><div class='d-inline btn-customer'></div></div>";
+  };
+
+  function answer_write_form(){
+    var index = new Date().getTime();
+    return "<div><label class='form-label col-sm-1 mb-2' for='question_answers_attributes_1_answer:'>Answer:</label>\
+    <input class='form-control col-sm-9 d-inline' required='required' type='text'\
+    name='question[answers_attributes]["+index+"][content]' id='question_abutton_delnswers_attributes_"+index+"_content'>\
+    <select class='form-select col-sm-1 d-inline' name='question[answers_attributes]["+index+"][correct]' id='question_answers_attributes_"+index+"_correct'><option value='true' selected>true</option>\
+    <option value='false' disabled='true'>false</option></select></div>";
+  };
+
+
+
+  function add_btn(){
+    $('.btn-add').remove();
+    $('.answer-group').append(answer_choice_form);
+    $('.answer-group div:first-child div').empty().append(button_del);
+    $('.answer-group div:last-child div').append(button_add, button_del);
+  };
+  function del_btn(thisObj){
+    thisObj.parent().parent().remove();
+    $('.answer-group div:last-child div').empty().append(button_add, button_del);
+    if($('.btn-customer').length == 1){
+      $('.answer-group div:last-child div').empty().append(button_add);
+    };
+  };
+  check_question_type();
+
+</script>
