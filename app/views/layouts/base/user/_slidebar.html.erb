@@ -4,7 +4,7 @@
   <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
       
-      <li class="nav-item has-treeview">
+      <li class="nav-item has-treeview" id="exam-treeview">
         <a href="#" class="nav-link">
           <i class="fas fa-chart-bar"></i>
           <p>
@@ -12,21 +12,21 @@
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
+        <ul class="nav nav-treeview" >
+          <li class="nav-item" id="all">
             <a href="/exams/show" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>All</p>
             </a>
           </li>
-          <li>
+          <li class="nav-item" id="random-exam">
             <a href="/exam/random" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Random Exam</p>
             </a>
           </li>
           <% @subjects.each do |sb|%>
-          <li class="nav-item">
+          <li class="nav-item" id="subject-<%= "#{sb.id}"%>">
             <a href="/exams/show.<%= sb.id %>" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p><%= "#{sb.name}".capitalize() %></p>
@@ -36,7 +36,7 @@
         </ul>
       </li>
 
-      <li class="nav-iten">
+      <li class="nav-item" id='my-submitted'>
         <a href="/mysubmitted" class="nav-link">
           <i class="fab fa-algolia"></i>
           <p>
@@ -45,7 +45,7 @@
         </a>
       </li>
 
-      <li>
+      <li class="nav-item" id='top-results'>
         <a href ="/results/top" class="nav-link">
           <i class="fas fa-chart-line"></i>
           <p>Top</p>
@@ -56,3 +56,5 @@
   </nav>
 </div>
 </aside>
+<script>
+</script>

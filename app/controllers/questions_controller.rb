@@ -43,8 +43,18 @@ class QuestionsController < ApplicationController
     def destroy
         question = Question.find(params[:format])
         authorize! :delete, @question
-        question.destroy! ? flash[:success] = "Delete Question Success!" : flash[:danger] = "Delete Question Fails!"
+        if question.exams
+            flash[:danger] = "Delete question fails"
+        else
+            question.destroy! ? flash[:success] = "Delete Question Success!" : flash[:danger] = "Delete Question Fails!"
+        end
         redirect_to questions_path            
+    end
+    def update
+        binding.pry
+        @question = Question.find(params[:format])
+        @question.update!(question_params) ? flash[:success] = "Update Question Success" : flash[:danger] = "Update Question Fails"
+        redirect_to questions_path(@question)
     end
 
     def find_question
@@ -62,6 +72,6 @@ class QuestionsController < ApplicationController
 
     private
         def question_params
-            params.require(:question).permit(:content, answers_attributes: [:content, :correct])
+            params.require(:question).permit(:content, :type_id, :subject_id, answers_attributes: [:content, :correct])
         end
 end

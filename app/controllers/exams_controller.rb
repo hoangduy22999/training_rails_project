@@ -53,7 +53,8 @@ class ExamsController < ApplicationController
     def show
         @exams = Exam.all.page(params[:page]).per(10)
         if params[:format]
-            @exams = @exams.search_by_subject(params[:format].to_i)
+            @current_subject = params[:format].to_i
+            @exams = @exams.search_by_subject(@current_subject)
         end
         @subject = Subject.all.map{ |sb| [sb.name.capitalize, sb.id]  }.unshift("")
     end
@@ -95,19 +96,16 @@ class ExamsController < ApplicationController
         @questions = @questions.group_by_subject(subject) if subject != 0
         @questions = @questions.group_by_type(question_type) if question_type != 0
         @questions = @questions.order(Arel.sql('RANDOM()')).limit(questions)
-        @exam = current_user.exams.build(time: time, name: "Random", subject_id: 1)
-        if can? @exam, :create
-            if @exam.save!
-                @exam.questions << @questions
-                redirect_to exam_detail_path(@exam)
-            else
-                redirect_to root_path
-                flash[:warning] = "Create Random Exam Fails"
-            end
+        @exam = current_user.exams.build(time: time, name: "Random (#{current_user.name})", subject_id: 1)
+        authorize! :create, @exam
+        if @exam.save!
+            @exam.questions << @questions
+            redirect_to exam_detail_path(@exam)
         else
-            flash[:danger] = "Create Exam Fails"
-            redirect_to exam_random_path
+            redirect_to root_path
+            flash[:warning] = "Create Random Exam Fails"
         end
+
     end
 
     def destroy

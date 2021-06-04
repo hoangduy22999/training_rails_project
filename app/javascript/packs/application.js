@@ -10,7 +10,8 @@ import "bootstrap";
 import "../stylesheets/application.scss";
 import 'select2'
 import 'select2/dist/css/select2.css'
-
+import "@fortawesome/fontawesome-free/css/all.min";
+require('admin-lte');
 //= require select2
 
 Rails.start()
@@ -22,12 +23,6 @@ var jQuery = require("jquery");
 global.$ = global.jQuery = jQuery;
 window.$ = window.jQuery = jQuery;
 
-require('admin-lte');
 
-import "@fortawesome/fontawesome-free/css/all.min";
-
-
-window.addEventListener('DOMContentLoaded', () => {
-})
 
 

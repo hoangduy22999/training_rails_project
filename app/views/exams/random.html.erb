@@ -5,9 +5,13 @@
         <%= label_tag "subject:"%>
         <%= select_tag :subject, options_for_select(@subject), class: 'form-select col-sm-2 d-inline' %>
         <%= label_tag "questions:"%>
-        <%= select_tag :questions, options_for_select([["Random", 0],["5",5],["10",10],["15",20]]), class: 'form-select col-sm-2 d-inline' %>
+        <%= select_tag :questions, options_for_select([["Random", 0],["5",5],["10",10],["15",15]]), class: 'form-select col-sm-2 d-inline' %>
         <%= label_tag "question_type:" %>
         <%= select_tag :question_type, options_for_select(question_type.unshift(["Random",0])), class: 'form-select col-sm-2 d-inline' %>
         <%= submit_tag "Start", class: 'btn btn-primary d-block' %>
     <% end %>
 </div>
+<script>
+    $('#exam-treeview').addClass('menu-is-opening menu-open')
+    $('#random-exam a').addClass('active')
+</script>

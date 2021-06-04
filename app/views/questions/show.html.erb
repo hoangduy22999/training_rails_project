@@ -1,7 +1,7 @@
 <div class="card">
 <% if @questions %>
   <div class="card-header">
-  <h3 class="card-title">My Exam</h3>
+  <h3 class="card-title">All Question</h3>
   </div>
   <div class="card-body">
   <table class="table table-bordered table-striped">
@@ -20,7 +20,7 @@
         <td><%= index  %></td>
         <td><%= link_to "#{question.content}", questions_path(question) %></td>
         <td><%= question.get_subject_name %></td>
-        <td><%= question_type[question.type_id][0] %></td>
+        <td><%= question.get_type %></td>
         <td><%= question.answers.count %></td>
       </tr>
       <% end %>
@@ -36,16 +36,16 @@
         <%= f.text_field :content, class: "form-control col-sm-9 mb-2 d-inline", required: "required" %>
         </br>
         <%= f.label "type:", class: "form-label col-sm-2"%>
-        <%= f.select :type_id, options_for_select(question_type, @question.type_id),{}, class: 'form-select col-sm-2 mb-2 d-inline' %>
+        <%= f.select :type_id, options_for_select([question_type[@question.type_id - 1]]),{}, class: 'form-select col-sm-2 mb-2 d-inline' %>
         <%= f.label "subject:", class:"form-label col-sm-2" %>
-        <%= f.select :subject_id, options_for_select(@subject, ),{}, class: 'form-select col-sm-2 mb-2 d-inline' %>
+        <%= f.select :subject_id, options_for_select(@subject, @question.subject_id),{}, class: 'form-select col-sm-2 mb-2 d-inline' %>
         <div id="add-answer-btn">
         </div>
       </div>
         <div class="answer-group">
           <% if @question.type_id == 2 %>
             <div class="answer-write">  
-              <%= fields_for(@question.answers.first) do |ff| %>
+              <%= fields_for(@question.get_answer_write) do |ff| %>
                 <%= ff.label :"answer:", class: "form-label col-sm-2 "%>
                 <%= ff.text_field :content, class: 'form-control col-sm-9 mb-2 d-inline' %>
               <% end %>
@@ -68,3 +68,6 @@
     <% end %>
   </div>
 <% end %>
+<script>
+  $('#all-question a').addClass('active')
+</script>

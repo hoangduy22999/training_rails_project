@@ -14,12 +14,13 @@
         <div class="answer-group">
         </div>
         </div>
-        <%= f.submit nil , :class=> 'col-sm-2 btn mt-2 btn-primary' %>
+        <%= f.submit "Create Question" , :class=> 'col-sm-2 btn mt-2 btn-primary' %>
         </div>        
     <% end %>
 </div>
 
 <script>
+  $('#create-question a').addClass('active')
   var button_del = "<button id='btn-del' type='button' onclick='del_btn($(this))' class='btn btn-outline-danger ms-1 btn-del col-sm-1'>Delete</button>";
   var button_add = "<button type='button' onclick='add_btn()' class='btn btn-outline-primary ms-1 btn-add col-sm-1'>Add</button>";
   function check_question_type(){

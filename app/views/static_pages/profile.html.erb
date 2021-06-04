@@ -8,8 +8,7 @@
                 <h4><%= current_user.name %></h4>
                 <p class="text-secondary mb-1"><%= current_user.age %></p>
                 <p class="text-muted font-size-sm"><%= School.find(1).name %></p>
-                <button class="btn btn-primary">Setting</button>
-                <button class="btn btn-outline-primary">Message</button>
+                <%= link_to "Setting", edit_user_registration_path(current_user), class: 'btn btn-primary'%>
             </div>
             </div>
         </div>

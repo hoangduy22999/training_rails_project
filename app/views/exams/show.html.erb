@@ -46,3 +46,11 @@
     </table>
   </div>
 </div>
+<script>
+  $('#exam-treeview').addClass('menu-is-opening menu-open')
+  <% if !@current_subject %>
+    $('#all > a').addClass('active')
+  <% else %>
+  $('#subject-<%= @current_subject %> a').addClass('active')
+  <% end %>
+</script>

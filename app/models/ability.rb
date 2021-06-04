@@ -18,8 +18,10 @@ class Ability
       user ||= User.new # guest user (not logged in)
       if user.admin?
         can :manage, :all
+        cannot :destroy, User, admin_role: true
       else
         can :read, :all
+        can :create, Exam
       end
     #
     # The first argument to `can` is the action you are giving the user

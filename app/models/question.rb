@@ -17,6 +17,10 @@ class Question < ApplicationRecord
   end
 
   def get_subject_name
-    Subject.find(self.subject_id).name
+    self.subject_id ? Subject.find(self.subject_id).name : "Customer"
+  end
+
+  def get_type
+    self.type_id == 1 ? "Choice" : "Write"
   end
 end

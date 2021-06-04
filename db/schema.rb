@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_093613) do
+ActiveRecord::Schema.define(version: 2021_06_04_100857) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(version: 2021_06_03_093613) do
     t.string "content"
     t.integer "result_id"
     t.boolean "correct"
-    t.integer "answers_id"
-    t.index ["answers_id"], name: "index_user_answers_on_answers_id"
+    t.integer "answer_id", null: false
+    t.index ["answer_id"], name: "index_user_answers_on_answer_id"
     t.index ["exam_question_id"], name: "index_user_answers_on_exam_question_id"
     t.index ["result_id"], name: "index_user_answers_on_result_id"
   end
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 2021_06_03_093613) do
   add_foreign_key "results", "subjects"
   add_foreign_key "results", "users"
   add_foreign_key "tops", "results", column: "sorces_id"
-  add_foreign_key "user_answers", "answers", column: "answers_id"
+  add_foreign_key "user_answers", "answers"
   add_foreign_key "user_answers", "exam_questions"
   add_foreign_key "user_answers", "results"
   add_foreign_key "users", "schools"
