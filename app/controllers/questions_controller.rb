@@ -43,7 +43,11 @@ class QuestionsController < ApplicationController
     def destroy
         question = Question.find(params[:format])
         authorize! :delete, @question
-        question.destroy! ? flash[:success] = "Delete Question Success!" : flash[:danger] = "Delete Question Fails!"
+        if question.exams
+            flash[:danger] = "Delete question fails, an exam contain the question"
+        else
+            question.destroy! ? flash[:success] = "Delete Question Success!" : flash[:danger] = "Delete Question Fails!"
+        end
         redirect_to questions_path            
     end
 
