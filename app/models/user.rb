@@ -5,9 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
     attr_accessor :remember_token
     has_many :exams, dependent: :destroy
-    has_many :user_answers, dependent: :destroy
-    has_many :exam_questions, through: :user_answers
-    has_many :results, dependent: :destroy
+    has_many :results, dependent: :nullify
     belongs_to :school, optional: true
 
     # validates :name, presence: true
@@ -24,4 +22,16 @@ class User < ApplicationRecord
     def admin?
         self.admin_role?
     end
+
+    def get_results_average
+        result_count = self.results.count > 0 ? self.results.count : 1
+        self.results.sum(:value) / result_count
+    end
+
+    def get_submitted
+        self.results.count
+    end
+
+    scope :top_user, ->{ joins(:results).order("results.value").group(:id) }
+    scope :user, ->{ where(admin_role: false) }
 end

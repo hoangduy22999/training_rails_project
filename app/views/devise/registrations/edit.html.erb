@@ -1,4 +1,4 @@
-<div class="card card-info col-sm-8">
+<div class="card card-info">
   <div class="card-header">
       <h3 class="card-title">Edit <%= resource_name.to_s.humanize %></h3>
   </div>
@@ -8,8 +8,8 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field form-group row">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :"email:"%>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control d-inline col-sm-10" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -17,8 +17,8 @@
   <% end %>
 
   <div class="field form-group row">
-    <%= f.label :new_password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.label :"new_password:" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control d-inline col-sm-10" %>
     <% if @minimum_password_length %>
       <br />
       <em><%= @minimum_password_length %> characters minimum</em>
@@ -27,12 +27,12 @@
 
   <div class="field form-group row">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control d-inline col-sm-10" %>
   </div>
 
   <div class="field form-group row">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.label :current_password %>
+    <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control d-inline col-sm-10" %>
   </div>
 </div>
 

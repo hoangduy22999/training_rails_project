@@ -8,8 +8,7 @@
                 <h4><%= current_user.name %></h4>
                 <p class="text-secondary mb-1"><%= current_user.age %></p>
                 <p class="text-muted font-size-sm"><%= School.find(1).name %></p>
-                <button class="btn btn-primary">Setting</button>
-                <button class="btn btn-outline-primary">Message</button>
+                <%= link_to "Setting", edit_user_registration_path(current_user), class: 'btn btn-primary'%>
             </div>
             </div>
         </div>
@@ -33,33 +32,6 @@
             </div>
             <div class="col-sm-9 text-secondary">
                 <%= current_user.email %>
-            </div>
-            </div>
-            <hr>
-            <div class="row">
-            <div class="col-sm-3">
-                <h6 class="mb-0">School</h6>
-            </div>
-            <div class="col-sm-9 text-secondary">
-                <%= current_user.school.name %>
-            </div>
-            </div>
-            <hr>
-            <div class="row">
-            <div class="col-sm-3">
-                <h6 class="mb-0">Age</h6>
-            </div>
-            <div class="col-sm-9 text-secondary">
-                <%= current_user.age %>
-            </div>
-            </div>
-            <hr>
-            <div class="row">
-            <div class="col-sm-3">
-                <h6 class="mb-0">Gender</h6>
-            </div>
-            <div class="col-sm-9 text-secondary">
-                <%= current_user.gender %>
             </div>
             </div>
         </div>

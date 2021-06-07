@@ -1,39 +1,56 @@
 <div>
-    <%= form_tag(exams_search_path, method: "get", remote: true) do %>
-        <%= text_field_tag :search, params[:search], class: 'form-control form-control-lg', placeholder: "Enter search term" %>
-        <%= select_tag :time, options_for_select([["<=30m",30],["<=60m",60],[">60m",61]]), class: 'form-group' %>
-        <%= submit_tag "Search", class: 'btn btn-lg btn-default' %>
+    <%= form_tag(exams_search_path, method: "get", remote: true, class: "ms-2") do %>
+        <%= label_tag "name:"%>
+        <%= text_field_tag :search, params[:search], class: 'form-control col-sm-4 d-inline', placeholder: "Enter search term" %>
+        <%= label_tag "time:"%>
+        <%= select_tag :time, options_for_select([[""],["15m",15*60],["45m",45*60],["90m",90*60]]), class: 'form-select col-sm-1 d-inline' %>
+        <%= label_tag "subject:"%>
+        <%= select_tag :subject, options_for_select(@subject), class: 'form-select col-sm-2 d-inline' %>
+        <%= label_tag "questions:"%>
+        <%= select_tag :questions, options_for_select([[""],["5",5],["10",10],["15",20]]), class: 'form-select col-sm-1 d-inline' %>
+        <%= submit_tag "Search", class: 'btn btn-primary d-block' %>
     <% end %>
 </div>
 
 <div class="card" id="search-results">
-              <div class="card-header">
-                <h3 class="card-title">Exam</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Questions</th>
-                    <th>Time</th>
-                    <th>Result</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <% @search_result_exams.each_with_index do |exam, index| %>
-                  <tr>
-                    <td><%= index + 1  %></td>
-                    <td><%= exam.name %></td>
-                    <td><%= exam.questions.count %></td>
-                    <td><%= show_time_in_hour(exam.time) %></td>
-                    <td><%= exam.result_average %></td>
-                  </tr>
-                  <% end %>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
+  <div class="card-header">
+    <h3 class="card-title">Exam</h3>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Questions</th>
+          <th>Time</th>
+          <th>Result Average</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @exams.each_with_index do |exam, index| %>
+        <tr>
+          <td><%= index + 1  %></td>
+          <td><%= link_to "#{exam.name}", exam_detail_path(exam) %></td>
+          <td><%= exam.get_subject_name.capitalize %></td>
+          <td><%= exam.questions.count %></td>
+          <td><%= "#{exam.time/60}m" %></td>
+          <td><%= exam.result_average %></td>
+          <td><%= exam.get_results %></td>
+        </tr>
+        <% end %>
+        <%= paginate @exams %>
+      </tbody>
+    </table>
+  </div>
 </div>
+<script>
+  $('#exam-treeview').addClass('menu-is-opening menu-open')
+  <% if !@current_subject %>
+    $('#all > a').addClass('active')
+  <% else %>
+  $('#subject-<%= @current_subject %> a').addClass('active')
+  <% end %>
+</script>

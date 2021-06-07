@@ -1,51 +1,46 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-
-<div class="sidebar">
-  <nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-      
-      <li class="nav-item has-treeview">
-      <a href="#" class="nav-link">
-        <i class="fas fa-chart-bar"></i>
-        <p>
-          Charts
-          <i class="right fas fa-angle-left"></i>
-        </p>
-      </a>
-      <ul class="nav nav-treeview">
-        <% @subjects.each do |sb|%>
-        <li class="nav-item">
-          <a href="/exam-group/<%= sb[1] %>" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p><%= "#{sb.name}".capitalize() %></p>
+  <div class="sidebar">
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">       
+        <li class="nav-item" id="all-exam">
+          <a href="/exam" class="nav-link">
+            <i class="fas fa-pencil-ruler"></i>
+            <p>All Exam</p>
           </a>
         </li>
-        <% end %>
+        <li class="nav-item" id="create-exam">
+          <a href="/exams" class="nav-link">
+          <i class="fas fa-pencil-ruler"></i>
+          <p>Create Exam</p>
+          </a>
+        </li>
+        <li class="nav-item" id="all-question">
+          <a href="/questions" class="nav-link">
+            <i class="fas fa-question"></i>
+            <p>All Question</p>
+          </a>
+        </li>
+        <li class="nav-item" id="create-question">
+          <a href="/question/create" class="nav-link">
+          <i class="fas fa-question"></i>
+          <p>Create Question</p>
+          </a>
+        </li>
+
+        <li class="nav-item" id="user-list">
+          <a href="/users" class="nav-link">
+          <i class="fas fa-users"></i>
+          <p>Users</p>
+          </a>
+        </li>
+
+        <li class="nav-item" id="top-results">
+          <a href ="/results/top" class="nav-link">
+            <i class="fas fa-chart-line"></i>
+            <p>Top</p>
+          </a>
+        </li>
       </ul>
-      </li>
-
-      <li class="nav-item">
-        <a href="/exam/create" class="nav-link">
-        <i class="fas fa-pencil-ruler"></i>
-        <p>Create Exam</p>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a href="/question/create" class="nav-link">
-        <i class="fas fa-question"></i>
-        <p>Create Question</p>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-        <i class="fas fa-users"></i>
-        <p>Users</p>
-        </a>
-      </li>
-
-    </ul>
-  </nav>
-</div>
+    </nav>
+  </div>
 </aside>

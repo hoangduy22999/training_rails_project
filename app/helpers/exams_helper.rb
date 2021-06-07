@@ -1,5 +1,5 @@
 module ExamsHelper
-    def show_time_in_hour(minutes)
-        minutes > 60 ? "#{minutes / 60}:#{minutes % 60}" : minutes
+    def show_minutes_seconds(seconds)
+        "#{seconds/60}m:#{seconds%60}" if seconds ||= 0
     end
 end

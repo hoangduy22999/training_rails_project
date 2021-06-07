@@ -1,0 +1,60 @@
+<div class="card" id="search-results">
+  <div class="card-header">
+    <h3 class="card-title">Exam</h3>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Submitted</th>
+          <th>Result Average</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%=  %></td>
+          <td><%= @user.name %></td>
+          <td><%= @user.email %></td>
+          <td><%= @user.get_submitted %></td>
+          <td><%= @user.get_results_average %></td>
+          <td><%= link_to "Delete", users_delete_path(@user) ,data: { confirm: 'Are you sure?' }, method: :post, class: 'btn btn-sm btn-danger btn-flat pull-left btn-add' %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" id="search-results">
+  <div class="card-header">
+    <h3 class="card-title">Submitted</h3>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Exam Name</th>
+          <th>Grade</th>
+          <th>Time</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @results.each do |result| %>
+          <tr>
+            <td><%=  %></td>
+            <td><% if result.get_exam_name != "Deleted" %><%= link_to "#{result.get_exam_name}", results_path(result) %><% else %>Deleted<% end %></td>
+            <td><%= result.value %></td>
+            <td><%= show_minutes_seconds(result.time) %></td>
+            <td><%= result.created_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
