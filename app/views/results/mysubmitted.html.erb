@@ -1,37 +1,85 @@
 <div class="col-md">
 <div class="card">
     <div class="card-header">
-    <h3 class="card-title">My Result</h3>
+        <h3 class="card-title">My Result</h3>
     </div>
     <!-- /.card-header -->
-    <div class="card-body">
-    <table class="table table-bordered">
+    <div class="card-body p-0">
+      <table class="table table-striped projects">
         <thead>
-        <tr>
-            <th style="width: 10px">#</th>
-            <th class="w-20">Exam</th>
-            <th>Result</th>
-            <th>Subject</th>
-            <th class="">Time</th>
-            <th>At</th>
-        </tr>
+            <tr>
+                <th style="width: 1%">
+                    #
+                </th>
+                <th style="width: 20%">
+                    Exam
+                </th>
+                <th style="width: 8%" class="text-center">
+                  Subject
+                </th>
+
+                <th>
+                    Grade
+                </th>
+                <th style="width: 20%">
+                  Time
+                </th>
+
+                <th style="width: 20%">
+                </th>
+            </tr>
         </thead>
         <tbody>
-        <% @results.each.with_index(1) do |result,index| %>
-        <tr>
-            <td><%= index %>.</td>
-            <td><% if result.get_exam_name != "Deleted" %><%= link_to "#{result.get_exam_name}", results_path(result) %><% else %>Deleted<% end %></td>
-            <td><%= result.value %></td>
-            <td><%= result.get_subject_name.capitalize %></td>
-            <td><%= show_minutes_seconds(result.time) %></td>
-            <td><%= result.created_at.to_formatted_s(:long) %></td>
-        </tr>
-        <% end %>
-        <%= paginate @results, theme: 'twitter-bootstrap-3' %>
+          <% @results.each.with_index(1) do |result|%>
+            <tr>
+              <td>
+                  #
+              </td>
+              <td>
+                  <a>
+                    <%= result.exam_name %>
+                  </a>
+                  <br/>
+                  <small>
+                      Created <%= result.created_at.to_formatted_s(:long)%>
+                  </small>
+              </td>
+
+              <td class="project-state">
+                <%= result.subject_name.capitalize %>
+              </td>
+
+              <td class="project_progress">
+                  <div class="progress progress-sm">
+                      <div class="progress-bar <% if result.value < 30 %>bg-red<% elsif result.value < 70 %>bg-yellow<% else %>bg-green<% end %>" role="progressbar" aria-valuenow="<%= result.value %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= "#{result.value}%" %>">
+                      </div>
+                  </div>
+                  <small>
+                      <%= "#{result.value} / 100"  %>
+                  </small>
+              </td>
+              <td>
+              <%= show_time_result(result.time) %>
+              </td>
+
+              <td class="project-actions text-right">
+                <%= link_to results_path(result), class: 'btn btn-success btn-sm' do %>
+                  <i class="fas fa-folder"></i>
+                  View
+                <% end %>
+                <%= link_to results_path(result), data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger btn-sm' do  %>
+                  <i class="fas fa-trash"></i>
+                  Delete
+                <% end %>                  
+              </td>
+            </tr>
+          <% end %>
+          <%= paginate @results, theme: 'twitter-bootstrap-3' %>
         </tbody>
-    </table>
+      </table>
     </div>
-</div>
+
+
 </div>
 <script>
  $('#my-submitted a').addClass('active');

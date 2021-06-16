@@ -1,5 +1,5 @@
 module QuestionsHelper
-    def question_type
-        [["choice", 1],["write", 2]]
+    def type
+        [["write", 1], ["choice", 2]]
     end
 end

@@ -14,42 +14,32 @@
         </a>
         <ul class="nav nav-treeview" >
           <li class="nav-item" id="all">
-            <a href="/exams/show" class="nav-link">
+            <div class="nav-link" id="all-exam">
               <i class="far fa-circle nav-icon"></i>
-              <p>All</p>
-            </a>
+              <%= link_to "All", exams_path %>
+            </div>
           </li>
-          <li class="nav-item" id="random-exam">
-            <a href="/exam/random" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Random Exam</p>
-            </a>
-          </li>
-          <% @subjects.each do |sb|%>
-          <li class="nav-item" id="subject-<%= "#{sb.id}"%>">
-            <a href="/exams/show.<%= sb.id %>" class="nav-link">
+          <li class="nav-item" >
+            <div class="nav-link" id="random-exam">
               <i class="far fa-circle nav-icon"></i>
-              <p><%= "#{sb.name}".capitalize() %></p>
-            </a>
+              <%= link_to "Random Exam", random_exams_path %>
+            </div>
           </li>
-          <% end %>
         </ul>
       </li>
 
-      <li class="nav-item" id='my-submitted'>
-        <a href="/mysubmitted" class="nav-link">
+      <li class="nav-item" >
+        <div class="nav-link" id='my-submitted'>
           <i class="fab fa-algolia"></i>
-          <p>
-            My Submitted
-          </p>
-        </a>
+          <%= link_to 'My Submitted', mysubmitted_results_path, class: 'd-inline' %>
+        </div>
       </li>
 
-      <li class="nav-item" id='top-results'>
-        <a href ="/results/top" class="nav-link">
+      <li class="nav-item" >
+        <div class="nav-link" id='top-results' >
           <i class="fas fa-chart-line"></i>
-          <p>Top</p>
-        </a>
+          <%= link_to 'Top', top_results_path, class: 'd-inline' %>
+        </div>
       </li>
 
     </ul>

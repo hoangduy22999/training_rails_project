@@ -13,23 +13,18 @@ class User < ApplicationRecord
                             length: { minimum: 6 }
     validates :email, presence:true, uniqueness: true
 
-    before_save :downcase_fields
-
-    def downcase_fields
-        self.email.downcase!
-    end
 
     def admin?
-        self.admin_role?
+        admin_role?
     end
 
-    def get_results_average
-        result_count = self.results.count > 0 ? self.results.count : 1
-        self.results.sum(:value) / result_count
+    def results_average
+        result_count = results.count > 0 ? results.count : 1
+        results.sum(:value) / result_count
     end
 
-    def get_submitted
-        self.results.count
+    def submitted
+        results.count
     end
 
     scope :top_user, ->{ joins(:results).order("results.value").group(:id) }

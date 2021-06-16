@@ -1,0 +1,59 @@
+<div>
+    <%= form_tag(search_exams_path, method: "get", remote: true, class: "ms-2") do %>
+        <%= label_tag "name:"%>
+        <%= text_field_tag :search, params[:search], class: 'form-control col-sm-4 d-inline', placeholder: "Enter search term" %>
+        <%= label_tag "time:"%>
+        <%= select_tag :time, options_for_select(time_exam), class: 'form-select col-sm-1 d-inline', include_blank: true %>
+        <%= label_tag "subject:"%>
+        <%= select_tag :subject, options_for_select(@subjects), class: 'form-select col-sm-2 d-inline', include_blank: true  %>
+        <%= label_tag "questions:"%>
+        <%= select_tag :questions, options_for_select([[""],["5",5],["10",10],["15",20]]), class: 'form-select col-sm-1 d-inline' %>
+        <%= submit_tag "Search", class: 'btn btn-primary d-block' %>
+    <% end %>
+</div>
+
+<div class="card" id="search-results">
+  <div class="card-header">
+    <h3 class="card-title">Exam</h3>
+  </div>
+  <div class="row">
+    <% @exams.each do |exam| %>
+      <div class="col-md-4">
+        <div class="card card-widget widget-user-2 shadow-sm">
+          <div class="widget-user-header bg-warning">
+            <h3 class="widget-user-username">
+              <%if current_user.admin? %><%= link_to "#{exam.name}", edit_exam_path(exam) %>
+              <% else %><%= link_to "#{exam.name}", exam_path(exam)%><% end %>
+            </h3>
+            <h5 class="widget-user-desc"><%= exam.subject_name.capitalize %></h5>
+          </div>
+          <div class="card-footer p-0">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <div  class="nav-link">
+                Questions <span class="float-right badge bg-primary"><%= exam.questions.count %></span>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link">
+                Time<span class="float-right badge bg-info"><%= show_time_exam exam.time %></span>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link">
+                Submitted <span class="float-right badge bg-success"><%= exam.total_results %></span>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link">
+                Average <span class="float-right badge bg-warning"><%= exam.result_average %></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= paginate @exams, theme: 'twitter-bootstrap-3' %>  
+  </div>
+</div>

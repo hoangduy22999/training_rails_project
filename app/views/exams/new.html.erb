@@ -9,7 +9,7 @@
         <%= f.text_field :name,  class: "form-control col-sm-10 ms-2 mb-2 d-inline", required: "required" %>
         <br />
         <%= f.label "time:", class: "col-sm-1" %>
-        <%= f.select :time, options_for_select([["15m",15*60],["45m",45*60],["90m",90*60]]), {}, class: 'form-select col-sm-2 ms-2 mb-2 d-inline', required: "required" %>
+        <%= f.select :time, options_for_select(time_exam), {}, class: 'form-select col-sm-2 ms-2 mb-2 d-inline', required: "required" %>
         <br />
         <%= f.label "Questions:", class: "col-sm-1" %>
         <div class="ms-2 d-inline h-4">
@@ -29,7 +29,7 @@
       placeholder: "Select a question",
       require: "required", 
       ajax:{
-        url: 'exam/find_question',
+        url: '/exams/find_question',
         dataType: 'json',
         data: function(params){
           var questionID = $(this).val();

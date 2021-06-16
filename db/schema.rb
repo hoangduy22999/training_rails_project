@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_100857) do
+ActiveRecord::Schema.define(version: 2021_06_07_142407) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -59,10 +59,9 @@ ActiveRecord::Schema.define(version: 2021_06_04_100857) do
     t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "type_id"
     t.integer "subject_id"
+    t.integer "types", default: 1
     t.index ["subject_id"], name: "index_questions_on_subject_id"
-    t.index ["type_id"], name: "index_questions_on_type_id"
   end
 
   create_table "results", force: :cascade do |t|

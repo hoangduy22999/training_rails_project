@@ -9,31 +9,71 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <% if user_signed_in? %>
-    <body class="hold-transition sidebar-mini layout-fixed">
-      <div class="wrapper">
-        <% @subjects  = Subject.all %>
-        <%= render 'layouts/base/admin/header'%>
-          <% if current_user.admin? %>
-            <%= render 'layouts/base/admin/slidebar'%>
-          <% else%>
-            <%= render 'layouts/base/user/slidebar' %>
-          <% end %>
-          <div class="content-wrapper d-100">
+    <% if current_user.admin? %>
+      <body class="hold-transition sidebar-mini layout-fixed">
+        <div class="wrapper">
+          <%= render 'layouts/base/admin/header'%>
+          <%= render 'layouts/base/admin/slidebar'%>
+          <div class="content-wrapper">
             <div class="container-fluid">
               <section class="content">
-                <div class="container-fluid">
-                  <% flash.each do |message_type, message| %>
-                    <div class="alert alert-<%= message_type %>"><%= message %></div>
-                  <% end %>
-                  <%= yield %>
-                </div>
+                <% flash.each do |message_type, message| %>
+                  <div class="alert alert-<%= message_type %>"><%= message %></div>
+                <% end %>
+                <%= yield %>
               </section>
+              </div>
             </div>
-          </div>
+        </div>
+      </body>
+    <% else %>
+      <body>
+      <div class="container">
+          <%= render 'layouts/base/user/navbar'  %>
+          <section class="content">
+            <% flash.each do |message_type, message| %>
+              <div class="alert alert-<%= message_type %>"><%= message %></div>
+            <% end %>
+            <%= yield %>
+          </section>
       </div>
-    </body>
+      </body>
+    <% end %>
   <% else %>
     <%= yield %>
   <% end %>
 
 </html>
+<script>
+  <% case controller.controller_name %>
+  <% when 'exams' %>
+      $('#exam-treeview').addClass('menu-is-opening menu-open')
+      <% case controller.action_name %>
+      <% when 'index' %>  
+        $('#all-exam').addClass('active')
+      <% when 'random' %>
+        $('#random-exam').addClass('active')
+      <% when 'new' %>
+        $('#create-exam').addClass('active') 
+      <% end %>
+  <% when 'results' %>
+      <% case controller.action_name %>
+      <% when 'mysubmitted' %>
+        $('#my-submitted').addClass('active')
+      <% when 'top' %>
+        $('#top-results').addClass('active')
+      <% end %>
+  <% when 'questions' %>
+      <% case controller.action_name %>
+      <% when 'show' %>
+        $('#all-question').addClass('active')
+      <% when  'new' %>
+        $('#create-question').addClass('active')
+      <% end %>
+  <% when 'users' %>
+      <% case controller.action_name %>
+      <% when 'show_all' %>
+        $('#show-all').addClass('active')
+      <% end %>
+  <% end %>
+</script>

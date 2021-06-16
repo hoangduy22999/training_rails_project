@@ -1,0 +1,59 @@
+<style>
+.topnav a:hover {
+    border-bottom: 3px solid red;
+}
+
+nav {
+  margin-bottom: 50px;
+  border-radius: 10px;  
+} 
+</style>
+<nav class="navbar navbar-expand-lg navbar-light bg-warning" id="user-nav">
+  <a class="navbar-brand" href="/">Exam App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto topnav">
+      <li class="nav-item active">
+        <%= link_to "All Exams", exams_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item active">
+        <%= link_to "Random Exam", random_exams_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item active">
+        <%= link_to "Top", top_results_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item active">
+        <%= link_to "My Submit", mysubmitted_results_path, class: 'nav-link' %>
+      </li>
+      <% unless  user_signed_in? %>
+        <li class="nav-item">
+            <a class="nav-link btn btn-primary text-white me-2" type="button" href="/users/sign_in" data-toggle="modal" data-target="#myModal">Sign In</a>                  
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-danger text-white" type="button" href="/users/sign_up" data-toggle="modal" data-target="#myModal">Register</a>
+        </li>
+      <% else %>
+        <li class="nav-item dropdown dropleft">
+          <a class="nav-link" data-bs-toggle="dropdown" href="/profile" aria-haspopup="true" aria-expanded="false">
+            <i class="far fa-user mr-1"></i><%= current_user.name %>
+          </a>
+          <div class="dropdown-menu dropdown-menu-sm">
+            <div class="dropdown-item">
+            <i class="fas fa-id-badge"></i><%= link_to "Profile", profile_path, class: "dropdown-item d-inline"%>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item">
+            <i class="fas fa-cog"></i><%= link_to "Setting", edit_user_registration_path(current_user), class: "dropdown-item d-inline" %>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item d-inline"%>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

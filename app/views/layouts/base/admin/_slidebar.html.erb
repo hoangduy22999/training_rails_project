@@ -2,43 +2,43 @@
   <div class="sidebar">
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">       
-        <li class="nav-item" id="all-exam">
-          <a href="/exam" class="nav-link">
-            <i class="fas fa-pencil-ruler"></i>
-            <p>All Exam</p>
-          </a>
-        </li>
-        <li class="nav-item" id="create-exam">
-          <a href="/exams" class="nav-link">
+        <li class="nav-item">
+          <div class="nav-link" id="all-exam">
           <i class="fas fa-pencil-ruler"></i>
-          <p>Create Exam</p>
-          </a>
+          <%= link_to "All Exam", exams_path, class: 'd-inline' %>
+          </div>
         </li>
-        <li class="nav-item" id="all-question">
-          <a href="/questions" class="nav-link">
+        <li class="nav-item" >
+          <div class="nav-link" id="create-exam">
+            <i class="fas fa-pencil-ruler"></i>
+            <%= link_to "Create Exam", new_exam_path, class: 'd-inline' %>
+          </div>
+        </li>
+        <li class="nav-item" >
+          <div class="nav-link" id="all-question">
+            <i class="fas fa-question" ></i>
+            <%= link_to "All Question", questions_path, class: 'd-inline' %>
+          </div>
+        </li>
+        <li class="nav-item" >
+          <div class="nav-link" id="create-question">
             <i class="fas fa-question"></i>
-            <p>All Question</p>
-          </a>
-        </li>
-        <li class="nav-item" id="create-question">
-          <a href="/question/create" class="nav-link">
-          <i class="fas fa-question"></i>
-          <p>Create Question</p>
-          </a>
+            <%= link_to "Create Question", new_question_path, class: 'd-inline' %>
+          </div>
         </li>
 
-        <li class="nav-item" id="user-list">
-          <a href="/users" class="nav-link">
+        <li class="nav-item" >
+          <div class="nav-link" id="show-all">
           <i class="fas fa-users"></i>
-          <p>Users</p>
-          </a>
+          <%= link_to "All User", users_path, class: 'd-inline' %>
+          </div>
         </li>
 
-        <li class="nav-item" id="top-results">
-          <a href ="/results/top" class="nav-link">
+        <li class="nav-item" >
+          <div class="nav-link" id="top-results">
             <i class="fas fa-chart-line"></i>
-            <p>Top</p>
-          </a>
+            <%= link_to "Top", top_results_path, class: 'd-inline' %>
+          </div>
         </li>
       </ul>
     </nav>

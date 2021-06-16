@@ -19,8 +19,8 @@
           <td><%=  %></td>
           <td><%= @user.name %></td>
           <td><%= @user.email %></td>
-          <td><%= @user.get_submitted %></td>
-          <td><%= @user.get_results_average %></td>
+          <td><%= @user.submitted %></td>
+          <td><%= @user.results_average %></td>
           <td><%= link_to "Delete", users_delete_path(@user) ,data: { confirm: 'Are you sure?' }, method: :post, class: 'btn btn-sm btn-danger btn-flat pull-left btn-add' %></td>
         </tr>
       </tbody>
@@ -48,7 +48,7 @@
         <% @results.each do |result| %>
           <tr>
             <td><%=  %></td>
-            <td><% if result.get_exam_name != "Deleted" %><%= link_to "#{result.get_exam_name}", results_path(result) %><% else %>Deleted<% end %></td>
+            <td><% if result.exam_name != "Deleted" %><%= link_to "#{result.exam_name}", results_path(result) %><% else %>Deleted<% end %></td>
             <td><%= result.value %></td>
             <td><%= show_minutes_seconds(result.time) %></td>
             <td><%= result.created_at %></td>

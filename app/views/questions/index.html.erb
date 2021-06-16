@@ -1,0 +1,31 @@
+<div class="card">
+<% if @questions %>
+  <div class="card-header">
+  <h3 class="card-title">All Question</h3>
+  </div>
+  <div class="card-body">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Content</th>
+        <th>Subject</th>
+        <th>Type</th>
+        <th>Answers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @questions.each.with_index(1) do |question, index| %>
+      <tr>
+        <td><%= index  %></td>
+        <td><%= link_to "#{question.content}", edit_question_path(question) %></td>
+        <td><%= question.subject_name %></td>
+        <td><%= question.types %></td>
+        <td><%= question.answers.count %></td>
+      </tr>
+      <% end %>
+      <%= paginate @questions %>
+    </tbody>
+  </table>
+  <% end %>
+  </div>

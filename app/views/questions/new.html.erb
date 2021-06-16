@@ -1,3 +1,8 @@
+<style>
+  div.box-body{
+    
+  }
+</style>
 <div class="hold-transition">
     <%= form_for @question do |f| %>
       <div class="question">
@@ -5,7 +10,7 @@
         <%= f.text_field :content, class: "form-control col-sm-10 mb-2 d-inline", required: "required" %>
         </br>
         <%= f.label "type:", class: "form-label col-sm-1"%>
-        <%= f.select :type_id, options_for_select(question_type, 2),{}, class: 'form-select mb-2 col-sm-2 d-inline' %>
+        <%= f.select :types, options_for_select(type),{}, class: 'form-select mb-2 col-sm-2 d-inline' %>
         <%= f.label "subject:", class:"form-label col-sm-1" %>
         <%= f.select :subject_id, options_for_select(@subject),{}, class: 'form-select col-sm-2 mb-2 d-inline' %>
         <div id="add-answer-btn">
@@ -20,12 +25,11 @@
 </div>
 
 <script>
-  $('#create-question a').addClass('active')
   var button_del = "<button id='btn-del' type='button' onclick='del_btn($(this))' class='btn btn-outline-danger ms-1 btn-del col-sm-1'>Delete</button>";
   var button_add = "<button type='button' onclick='add_btn()' class='btn btn-outline-primary ms-1 btn-add col-sm-1'>Add</button>";
   function check_question_type(){
-      var text=$('#question_type_id').val();
-      if(text==1){
+      var text=$('#question_types').val();
+      if(text== "2"){
         $('.answer-group').empty();
         $('.answer-group').append(answer_choice_form)
         $('.answer-group div:first-child div').append(button_add)
@@ -35,7 +39,7 @@
       }     
   }
 
-  $('#question_type_id').change(check_question_type);
+  $('#question_types').change(check_question_type);
 
   function answer_choice_form(){
     var index = new Date().getTime();

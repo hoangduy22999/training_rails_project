@@ -1,0 +1,37 @@
+<div id="result-detail" >
+  <div>
+    <h1>Grade: <%= @result.value %>/100</h1>
+    <h3>Time: <%= show_time_result(@result.time) %></h3>
+    <h5>At: <%= @result.created_at.to_formatted_s(:long) %> </h5>
+  </div>
+  <% @questions.each.with_index(1) do |question, index| %>
+    <div class="question" >
+      <div class="question-content">
+        <b><%= "Question #{index} : "%></b><br />
+        <%= question.content %>
+      </div>
+      <div class="answers">
+        <% if question.types == 2 %>
+          <% question.answers.each do |answer| %>
+            <div class="answer-choice" <%if !answer.correct %>style="background-color:#FE0000FF;"<% end %>>
+              <% if @result.user_answer_correct(answer) %>
+                <input type="checkbox" onclick="return false;" checked >
+                <%= " #{answer.content}" %></input>
+              <% else %>
+                <input type="checkbox" onclick="return false;"><%= " #{answer.content}" %></input>
+              <% end %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="answer-write">
+            <input type="text" value ="<%= @result.user_answer_content(question.answers.first) %>" readonly style="
+              <% if @result.correct_write?(question) %> background-color:#195190FF"></input>
+              <% else %>background-color:#FE0000FF; text-decoration: line-through;"></input>
+              <input type="text" value ="<%= question.answer_write %>" readonly style="background-color:#195190FF"></input>
+              <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

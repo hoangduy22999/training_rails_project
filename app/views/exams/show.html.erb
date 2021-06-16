@@ -1,56 +1,28 @@
-<div>
-    <%= form_tag(exams_search_path, method: "get", remote: true, class: "ms-2") do %>
-        <%= label_tag "name:"%>
-        <%= text_field_tag :search, params[:search], class: 'form-control col-sm-4 d-inline', placeholder: "Enter search term" %>
-        <%= label_tag "time:"%>
-        <%= select_tag :time, options_for_select([[""],["15m",15*60],["45m",45*60],["90m",90*60]]), class: 'form-select col-sm-1 d-inline' %>
-        <%= label_tag "subject:"%>
-        <%= select_tag :subject, options_for_select(@subject), class: 'form-select col-sm-2 d-inline' %>
-        <%= label_tag "questions:"%>
-        <%= select_tag :questions, options_for_select([[""],["5",5],["10",10],["15",20]]), class: 'form-select col-sm-1 d-inline' %>
-        <%= submit_tag "Search", class: 'btn btn-primary d-block' %>
-    <% end %>
-</div>
-
+</style>
 <div class="card" id="search-results">
   <div class="card-header">
     <h3 class="card-title">Exam</h3>
   </div>
   <div class="card-body">
-    <table class="table table-bordered table-striped">
+    <table class="table table-striped projects">
       <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Subject</th>
-          <th>Questions</th>
-          <th>Time</th>
-          <th>Result Average</th>
-          <th>Submitted</th>
-        </tr>
       </thead>
       <tbody>
-        <% @exams.each_with_index do |exam, index| %>
-        <tr>
-          <td><%= index + 1  %></td>
-          <td><%= link_to "#{exam.name}", exam_detail_path(exam) %></td>
-          <td><%= exam.get_subject_name.capitalize %></td>
-          <td><%= exam.questions.count %></td>
-          <td><%= "#{exam.time/60}m" %></td>
-          <td><%= exam.result_average %></td>
-          <td><%= exam.get_results %></td>
-        </tr>
-        <% end %>
-        <%= paginate @exams %>
+        <tr><td><b>Name</b></td><td><%= @exam.name %></td></tr>
+        <tr><td><b>Questions</b></td><td><%= @exam.questions.count %></td></tr>
+        <tr><td><b>Subject</b></td><td><%= @exam.subject_name.capitalize %></td></tr>
+        <tr><td><b>Time</b></td><td><%= show_time_exam(@exam.time) %></td></tr>
+        <tr><td><b>Submitted</b></td><td><%= @exam.total_results %></td></tr>
+        <tr><td><b>Result Average</b></td><td><%= @exam.result_average %></td></tr>
+        <tr><td><b>Time Average</b></td><td><%= show_time_result(@exam.time_average) %></td></tr>
       </tbody>
     </table>
   </div>
+
+  <div>
+    <%= link_to "Start", submit_exam_path(@exam), class: 'btn btn-primary me-4 mb-1 float-sm-right' %>
+  </div>
 </div>
-<script>
-  $('#exam-treeview').addClass('menu-is-opening menu-open')
-  <% if !@current_subject %>
-    $('#all > a').addClass('active')
-  <% else %>
-  $('#subject-<%= @current_subject %> a').addClass('active')
-  <% end %>
-</script>
+
+
+

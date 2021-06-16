@@ -20,15 +20,15 @@
                 <% @result_top.each.with_index(1) do |top,index| %>
                 <tr>
                     <td><%= index %>.</td>
-                    <td><%= top.user.name %></td>
+                    <td><%= top.user_name %></td>
                     <td><%= top.value %></td>
-                    <td><%= top.get_subject_name.capitalize %></td>
-                    <td><%= show_minutes_seconds(top.time) %></td>
+                    <td><%= top.subject_name.capitalize %></td>
+                    <td><%= show_time_result(top.time) %></td>
                 </tr>
                 <% end %>
                 </tbody>
             </table>
-            <%= link_to "Show more" , results_top_path %>
+            <%= link_to "Show more" , top_results_path %>
             </div>
         </div>
     </div>
@@ -53,15 +53,15 @@
                 <% @my_result.each.with_index(1) do |top,index| %>
                 <tr>
                     <td><%= index %>.</td>
-                    <td><%= top.user.name %></td>
+                    <td><%= top.user_name %></td>
                     <td><%= top.value %></td>
-                    <td><%= top.get_subject_name.capitalize %></td>
-                    <td><%= show_minutes_seconds(top.time) %></td>
+                    <td><%= top.subject_name.capitalize %></td>
+                    <td><%= show_time_result(top.time) %></td>
                 </tr>
                 <% end %>
                 </tbody>                    
             </table>
-            <%= link_to "Show more", mysubmitted_path %>
+            <%= link_to "Show more", mysubmitted_results_path %>
             </div>
         </div>
     </div>

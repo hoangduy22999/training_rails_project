@@ -1,0 +1,38 @@
+<div>
+  <%= form_for @question do |f| %>
+    <div class="question">
+      <%= f.label "question:", class:"form-label col-sm-2" %>
+      <%= f.text_field :content, class: "form-control col-sm-9 mb-2 d-inline", required: "required" %>
+      </br>
+      <%= f.label "type:", class: "form-label col-sm-2"%>
+      <%= f.select :types, options_for_select(type),{}, class: 'form-select col-sm-2 mb-2 d-inline' %>
+      <%= f.label "subject:", class:"form-label col-sm-2" %>
+      <%= f.select :subject_id, options_for_select(@subject, @question.subject_id),{}, class: 'form-select col-sm-2 mb-2 d-inline' %>
+      <div id="add-answer-btn">
+      </div>
+    </div>
+      <div class="answer-group">
+        <% if @question.types == 2 %>
+          <div class="answer-write">  
+            <%= fields_for(@question.answer_write) do |ff| %>
+              <%= ff.label :"answer:", class: "form-label col-sm-2 "%>
+              <%= ff.text_field :content, class: 'form-control col-sm-9 mb-2 d-inline' %>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="answer-choice">
+            <% @question.answers.each do |answer| %>
+              <%= fields_for(answer) do |ff| %>
+                <%= ff.label :"answer:", class: "form-label col-sm-2 "%>
+                <%= ff.text_field :content, class: 'form-control col-sm-9 mb-2 d-inline' %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      </div>
+      <%= f.submit nil , :class=> 'btn btn-sm btn-info btn-flat pull-left btn-add col-sm-2 ms-2 d-inline' %>
+      <%= link_to "Delete Question",question_path(@question), data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-sm btn-danger btn-flat pull-left btn-add col-sm-2 mt-2 ms-2 mb-2'%>
+      </div>        
+  <% end %>
+</div>

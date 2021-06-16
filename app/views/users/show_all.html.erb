@@ -20,9 +20,9 @@
           <td><%= index %></td>
           <td><%= user.name %></td>
           <td><%= link_to user.email, users_path(user) %></td>
-          <td><%= user.get_submitted %></td>
-          <td><%= user.get_results_average %></td>
-          <td><%= link_to "Delete", users_delete_path(user) ,data: { confirm: 'Are you sure?' }, method: :post, class: 'btn btn-sm btn-danger btn-flat pull-left btn-add' %></td>
+          <td><%= user.submitted %></td>
+          <td><%= user. results_average %></td>
+          <td><%= link_to "Delete", users_path(user) ,data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-sm btn-danger btn-flat pull-left btn-add' %></td>
         </tr>
         <% end %>
         <%= paginate @users %>

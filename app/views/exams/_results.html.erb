@@ -1,33 +1,40 @@
 <div class="card-header">
-  <h3 class="card-title">Exam</h3>
+<h3 class="card-title">Exam</h3>
 </div>
-<!-- /.card-header -->
-<div class="card-body">
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Subject</th>
-        <th>Questions</th>
-        <th>Time</th>
-        <th>Result</th>
-        <th>Submitted</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @exams.each.with_index(1) do |exam, index| %>
-        <tr>
-          <td><%= index %></td>
-          <td><%= link_to exam.name, exam_detail_path(exam) %></td>
-          <td><%= exam.get_subject_name.capitalize %></td>
-          <td><%= exam.questions.count %></td>
-          <td><%= "#{exam.time/60}m" %></td>
-          <td><%= exam.result_average %></td>
-          <td><%= exam.get_results %></td>
-        </tr>
-      <% end %>
-      <%= paginate @exams %>
-    </tbody>
-  </table>
+<div class="row">
+<% @exams.each_with_index do |exam, index| %>
+  <div class="col-md-4">
+    <div class="card card-widget widget-user-2 shadow-sm">
+      <div class="widget-user-header bg-warning">
+        <h3 class="widget-user-username"><%= link_to "#{exam.name}", exam_path(exam) %></h3>
+        <h5 class="widget-user-desc"><%= exam.subject_name.capitalize %></h5>
+      </div>
+      <div class="card-footer p-0">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <div  class="nav-link">
+            Questions <span class="float-right badge bg-primary"><%= exam.questions.count %></span>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+            Time<span class="float-right badge bg-info"><%= show_time_exam exam.time %></span>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+            Submitted <span class="float-right badge bg-success"><%= exam.total_results %></span>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+            Average <span class="float-right badge bg-warning"><%= exam.result_average %></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= paginate @exams, theme: 'twitter-bootstrap-3' %>  
 </div>

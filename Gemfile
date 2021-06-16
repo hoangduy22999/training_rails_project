@@ -13,6 +13,8 @@ gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 5.0'
 # Use devise gem to authenticate
 gem "devise", "~> 4.1"
+# User ruboco gem to check code
+gem 'rubocop', require: false
 # Use cancancan admin permission
 gem 'cancancan'
 # Use ransack to search query

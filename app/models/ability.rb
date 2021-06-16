@@ -7,7 +7,7 @@ class Ability
     # alias_action :create, :read, :update, :destroy, to: :crud
     # can :read, :all
     # if user.present?
-    #   can :create, UserAnswer, Exam     
+    #   can :create, UserAnswer, Exam
     #   if !user.admin?
     #     can :crud, User, admin: false
     #     can :crud, Exam, Question
@@ -15,14 +15,15 @@ class Ability
     # end
     # Define abilities for the passed in user here. For example:
     #
-      user ||= User.new # guest user (not logged in)
-      if user.admin?
-        can :manage, :all
-        cannot :destroy, User, admin_role: true
-      else
-        can :read, :all
-        can :create, Exam
-      end
+    user ||= User.new # guest user (not logged in)
+    if user.admin?
+      can :manage, :all
+      cannot :destroy, User, admin_role: true
+    else
+      can :read, :all
+      can :create, Exam
+      can :destroy, Result, user_id: user.id
+    end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
